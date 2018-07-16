@@ -26,6 +26,7 @@ exports.do = function() {
       if (err != null) {
         console.log(err);
         failure(err);
+        return;
       }
 
       success();
