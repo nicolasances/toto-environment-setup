@@ -4,7 +4,7 @@ var buildAndDeployMS = require('./BuildAndDeployMS');
 
 exports.do = function() {
 
-  return new Promise(function(success, failure) {{
+  return new Promise(function(success, failure) {
 
     console.log('Setting up all the Toto Microservices');
 
@@ -33,6 +33,8 @@ exports.do = function() {
         success();
 
       });
+
+    });
 
   });
 
