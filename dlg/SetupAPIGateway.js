@@ -47,7 +47,7 @@ exports.do = function() {
 
   });
 
-}
+});
 
 // Creates the API on Tyk
 var createTykAPI = function(api) {
