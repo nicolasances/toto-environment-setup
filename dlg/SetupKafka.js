@@ -1,4 +1,6 @@
 
+var exec = require('child_process').exec;
+
 // Sets up the Kafka and Zookeeper services
 exports.do = function() {
 
