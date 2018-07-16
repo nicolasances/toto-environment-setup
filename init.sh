@@ -3,6 +3,9 @@
 mkdir /mongo-setup;
 mkdir /mongo-data;
 mkdir /nginx-setup;
+mkdir /tyk;
+
+cp tyk.conf /tyk;
 
 # Installing docker
 sudo yum install -y yum-utils device-mapper-persistent-data lvm2;
