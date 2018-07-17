@@ -11,6 +11,10 @@ exports.do = function(microservice) {
     // Creating the command
     var command = '';
 
+    // Remove miroservice image if it already existed
+    command += 'docker stop ' + microservice.localhost + ' || true; ';
+    command += 'docker rm ' + microservice.localhost + ' || true; ';
+
     // Pull the image from
     command += 'docker run -d --network totonet --name ' + microservice.localhost + ' --restart always nicolasances/' + microservice.localhost + ':latest';
 
