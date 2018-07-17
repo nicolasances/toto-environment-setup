@@ -101,7 +101,7 @@ var createTykAPI = function(api) {
 
     // Create the API on Tyk by calling the HTTP API
     var data = {
-      url : "http://gateway:8080/tyk/apis -H 'x-tyk-authorization: totocazzo' -H 'Content-Type: application/json'",
+      url : "http://gateway:8080/tyk/apis",
       headers : {
         'User-Agent' : 'node.js',
         'x-tyk-authorization': 'totocazzo',
