@@ -111,6 +111,7 @@ var createTykAPI = function(api) {
     };
 
     console.log('Creating Tyk API ' + api.localhost);
+    console.log(data);
 
     http.post(data, function(error, response, body) {
 
