@@ -9,6 +9,12 @@ exports.do = function() {
     // Command
     var command = '';
 
+    // Stop gateway if any
+    command += 'docker stop gateway || true; ';
+
+    // Remove gateway if any
+    command += 'docker rm gateway || true; ';
+
     // Install REDIS
     command += 'docker run -itd --network totonet --name redis redis; ';
 
