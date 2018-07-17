@@ -1,4 +1,4 @@
-
+var getGithubApisDlg = require('./GetGithubApisDelegate');
 var exec = require('child_process').exec;
 var http = require('request');
 
