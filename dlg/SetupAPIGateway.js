@@ -30,26 +30,30 @@ exports.do = function() {
         return;
       }
 
-      // Retrieve all APIs to set on the gateway and set them up
-      getGithubApis.getApis().then(function(data) {
+      setTimeout(function() {
 
-        var promises = [];
+        // Retrieve all APIs to set on the gateway and set them up
+        getGithubApis.getApis().then(function(data) {
 
-        // For each API, create an API on Tyk
-        for (var i = 0; i < data.apis.length; i++) {
+          var promises = [];
 
-          promises.push(createTykAPI(data.apis[i]));
+          // For each API, create an API on Tyk
+          for (var i = 0; i < data.apis.length; i++) {
 
-        }
+            promises.push(createTykAPI(data.apis[i]));
 
-        // Wait for all the promises to finish
-        Promise.all(promises).then(function() {
+          }
 
-          success();
+          // Wait for all the promises to finish
+          Promise.all(promises).then(function() {
+
+            success();
+
+          });
 
         });
 
-      });
+      }, 20000);
 
     });
 
