@@ -3,6 +3,7 @@ var Promise = require('promise');
 var bodyParser = require("body-parser");
 
 var postSetup = require('./dlg/PostSetup');
+var createTykAPI = require('./dlg/CreateTykAPI');
 
 var apiName = 'environment-setup';
 
@@ -27,6 +28,10 @@ app.get('/', function(req, res) {res.send({api: apiName, status: 'running'});});
  */
 app.post('/setup', function(req, res) {
   postSetup.do(req.body).then(function(result) {res.status(200).send(result);});
+});
+
+app.post('/test', function(req, res) {
+  createTykAPI.do().then(function() {res.status(200).send()});
 });
 
 app.listen(8080, function() {
