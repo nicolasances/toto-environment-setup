@@ -47,7 +47,7 @@ exports.do = function() {
         'x-tyk-authorization': 'totocazzo',
         'Content-Type' : 'application/json'
       },
-      body: tykApi
+      body: JSON.stringify(tykApi)
     };
 
     console.log('Creating Tyk API');
