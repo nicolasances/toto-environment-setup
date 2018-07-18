@@ -49,7 +49,7 @@ exports.do = function() {
       body: tykApi
     };
 
-    console.log('Creating Tyk API ' + api.localhost);
+    console.log('Creating Tyk API');
     console.log(data);
 
     http.post(data, function(error, response, body) {

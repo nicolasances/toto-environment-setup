@@ -35,5 +35,5 @@ app.post('/test', function(req, res) {
 });
 
 app.listen(8080, function() {
-  console.log('Dockerhub Webhook Microservice up and running');
+  console.log('Toto Environment Setup Microservice up and running');
 });
