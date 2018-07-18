@@ -53,7 +53,7 @@ exports.do = function() {
     console.log('Creating Tyk API');
     console.log(data);
 
-    http.request(data, function(error, response, body) {
+    http(data, function(error, response, body) {
 
       console.log(body);
 
