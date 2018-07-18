@@ -1,4 +1,5 @@
 var getGithubApis = require('./GetGithubApis');
+var createTykAPI = require('./CreateTykAPI');
 var exec = require('child_process').exec;
 var http = require('request');
 
@@ -35,12 +36,14 @@ exports.do = function() {
         // Retrieve all APIs to set on the gateway and set them up
         getGithubApis.getApis().then(function(data) {
 
+          // Promises array to join all the API creation promises
           var promises = [];
 
           // For each API, create an API on Tyk
           for (var i = 0; i < data.apis.length; i++) {
 
-            promises.push(createTykAPI(data.apis[i]));
+            // Create the Tyk API
+            promises.push(createTykAPI.do(data.apis[i]));
 
           }
 
@@ -53,74 +56,9 @@ exports.do = function() {
 
         });
 
-      }, 20000);
+      }, 5000);
 
     });
 
   });
-}
-
-// Creates the API on Tyk
-var createTykAPI = function(api) {
-
-  return new Promise(function(success, failure) {
-
-    // Build the JSON object to send to Tyk
-    var tykApi = {
-      "name": api.name,
-      "slug": api.name,
-      "api_id": api.localhost,
-      "org_id": "53ac07777cbb8c2d53000002",
-      "use_keyless": false,
-      "use_basic_auth": true,
-      "enable_jwt": false,
-      "auth": {
-        "auth_header_name": "Authorization"
-      },
-      "definition": {
-        "location": "header",
-        "key": "x-api-version"
-      },
-      "version_data": {
-        "not_versioned": true,
-        "versions": {
-          "Default": {
-            "name": "Default",
-            "use_extended_paths": true
-          }
-        }
-      },
-      "proxy": {
-        "listen_path": "/" + api.name + "/",
-        "target_url": "http://" + api.localhost + ":8080/",
-        "strip_listen_path": true
-      },
-      "active": true,
-      "domain": ""
-    }
-
-    // Create the API on Tyk by calling the HTTP API
-    var data = {
-      url : "http://gateway:8080/tyk/apis",
-      headers : {
-        'User-Agent' : 'node.js',
-        'x-tyk-authorization': 'totocazzo',
-        'Content-Type' : 'application/json'
-      },
-      body: tykApi
-    };
-
-    console.log('Creating Tyk API ' + api.localhost);
-    console.log(data);
-
-    http.post(data, function(error, response, body) {
-
-      console.log(body);
-
-      success();
-
-    });
-
-  });
-
 }

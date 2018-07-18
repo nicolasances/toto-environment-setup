@@ -1,14 +1,14 @@
 var http = require('request');
 
-exports.do = function() {
+exports.do = function(api) {
 
   return new Promise(function(success, failure) {
 
     // Build the JSON object to send to Tyk
     var tykApi = {
-      "name": 'expenses',
-      "slug": 'expenses',
-      "api_id": 'expenses',
+      "name": api.name,
+      "slug": api.name,
+      "api_id": api.localhost,
       "org_id": "53ac07777cbb8c2d53000002",
       "use_keyless": false,
       "use_basic_auth": true,
@@ -30,8 +30,8 @@ exports.do = function() {
         }
       },
       "proxy": {
-        "listen_path": "/expenses/",
-        "target_url": "http://toto-nodems-expenses:8080/",
+        "listen_path": "/" + api.name + "/",
+        "target_url": "http://" + api.localhost + ":8080/",
         "strip_listen_path": true
       },
       "active": true,
@@ -50,8 +50,7 @@ exports.do = function() {
       body: JSON.stringify(tykApi)
     };
 
-    console.log('Creating Tyk API');
-    console.log(data);
+    console.log('Creating Tyk API ' + api.name + " - " + api.localhost);
 
     http(data, function(error, response, body) {
 
