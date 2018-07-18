@@ -41,6 +41,7 @@ exports.do = function() {
     // Create the API on Tyk by calling the HTTP API
     var data = {
       url : "http://gateway:8080/tyk/apis",
+      method: 'POST',
       headers : {
         'User-Agent' : 'node.js',
         'x-tyk-authorization': 'totocazzo',
