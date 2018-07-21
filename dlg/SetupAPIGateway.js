@@ -62,6 +62,8 @@ exports.do = function() {
               }
             };
 
+            console.log('Reloading gateway');
+
             // Reload the gateway
             http(data, function(err, resp, body) {
 
