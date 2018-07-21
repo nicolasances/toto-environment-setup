@@ -58,8 +58,7 @@ exports.do = function() {
               method: 'GET',
               headers : {
                 'User-Agent' : 'node.js',
-                'x-tyk-authorization': 'totocazzo',
-                'Content-Type' : 'application/json'
+                'x-tyk-authorization': 'totocazzo'
               }
             };
 
