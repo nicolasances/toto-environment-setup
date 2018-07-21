@@ -12,15 +12,17 @@ exports.do = function() {
 
     // Stop gateway if any
     command += 'docker stop gateway || true; ';
+    command += 'docker stop redis || true; ';
 
     // Remove gateway if any
     command += 'docker rm gateway || true; ';
+    command += 'docker rm redis || true; ';
 
     // Install REDIS
     command += 'docker run -itd --network totonet --name redis redis; ';
 
     // Install Tyk Gateway
-    command += 'docker run -itd --network totonet --name gateway -e TYKSECRET=totocazzo -e TYKLISTENPORT=8080 -v /tyk/tyk.conf:/opt/tyk-gateway/tyk.conf tykio/tyk-gateway; ';
+    command += 'docker run -itd --network totonet --name gateway --restart always -e TYKSECRET=totocazzo -e TYKLISTENPORT=8080 -v /tyk/tyk.conf:/opt/tyk-gateway/tyk.conf tykio/tyk-gateway; ';
 
     exec(command, function(err, stdout, stderr) {
 
