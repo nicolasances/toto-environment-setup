@@ -52,7 +52,21 @@ exports.do = function() {
           // Wait for all the promises to finish
           Promise.all(promises).then(function() {
 
-            success();
+            // Prepare the gateway reload
+            var data = {
+              url : "http://gateway:8080/tyk/reload",
+              method: 'GET',
+              headers : {
+                'User-Agent' : 'node.js',
+                'x-tyk-authorization': 'totocazzo',
+                'Content-Type' : 'application/json'
+              }
+            };
+
+            // Reload the gateway
+            http(data, function(err, resp, body) {
+              success();
+            });
 
           });
 
