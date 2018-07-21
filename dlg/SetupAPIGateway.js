@@ -65,6 +65,10 @@ exports.do = function() {
 
             // Reload the gateway
             http(data, function(err, resp, body) {
+
+              if (err) console.log(err);
+              console.log(body);
+
               success();
             });
 
