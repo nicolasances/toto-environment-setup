@@ -15,6 +15,7 @@ exports.do = function() {
     // Prepare the call to the mongo-restore API
     var data = {
         url : 'http://toto-nodems-mongo-restore:8080/restores',
+        method: 'POST',
         headers : {
           'Content-Type' : 'application/json',
           'Accept' : 'application/json'
