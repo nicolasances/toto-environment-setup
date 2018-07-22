@@ -4,7 +4,7 @@ exports.do = function() {
 
   return new Promise(function(success, failure) {
 
-    console.log("Tyk API Gatewy : performing hot reload of the gateway...");
+    console.log("Tyk API Gateway : performing hot reload of the gateway...");
 
     // Prepare the gateway reload
     var data = {
