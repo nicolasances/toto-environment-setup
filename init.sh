@@ -5,8 +5,6 @@ mkdir /mongo-data;
 mkdir /nginx-setup;
 mkdir /tyk;
 
-cp tyk.conf /tyk;
-
 # Create the NGINX config file
 touch /nginx-setup/nginx.conf;
 
@@ -23,7 +21,7 @@ systemctl start docker;
 docker network create totonet;
 
 # Starting this microservice
-docker run -d -p 9999:8080 --network totonet -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):/usr/bin/docker --name toto-environment-setup nicolasances/toto-environment-setup:latest;
+docker run -d -p 9999:8080 --network totonet -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):/usr/bin/docker -v /nginx-setup:/nginx-setup --name toto-environment-setup nicolasances/toto-environment-setup:latest;
 
 # Now you can call http://<host>:9999/setup
 echo 'You can now start the setup by POST http://<host>:9999/setup !';
