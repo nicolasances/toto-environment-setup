@@ -1,4 +1,4 @@
-var installMongo = require('./dlg/MongoInstall');
+var installMongo = require('./MongoInstall');
 var exec = require('child_process').exec;
 
 /**
