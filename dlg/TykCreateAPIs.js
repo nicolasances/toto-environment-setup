@@ -23,7 +23,7 @@ exports.do = function() {
       }
 
       // Wait for all the promises to finish
-      Promise.all(promises).then({
+      Promise.all(promises).then(function() {
 
         console.log("Tyk API Gateway : APIs setup complete!");
 
