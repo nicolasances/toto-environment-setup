@@ -13,7 +13,7 @@ exports.do = function() {
     console.log('NGINX : Starting NGINX...');
 
     // Start NGINX
-    var startCmd += 'docker run -d ' + port + ' ' + certificateVolume + ' --network totonet --restart always --name toto-nginx toto-nginx'
+    var startCmd = 'docker run -d ' + port + ' ' + certificateVolume + ' --network totonet --restart always --name toto-nginx toto-nginx'
 
     exec(startCmd, function(err, stdout, stderr) {
 
