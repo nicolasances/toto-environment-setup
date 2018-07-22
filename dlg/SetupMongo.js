@@ -1,4 +1,4 @@
-
+var installMongo = require('./dlg/MongoInstall');
 var exec = require('child_process').exec;
 
 /**
@@ -10,28 +10,10 @@ exports.do = function() {
 
     console.log('Mongo DB : setting up...');
 
-    // Setup the command for executing mongo
-    var command = '';
+    // Install Mongo DB
+    installMongo.do().then(function() {
 
-    // Stop Mongo if it already exists
-    command += 'docker stop mongo || true; ';
-
-    // Remove Mongo if any
-    command += 'docker rm mongo || true; ';
-
-    // Run mongo
-    command += 'docker run -d -v /mongo-setup:/mongo-setup -v /mongo-data:/mongo-data --network totonet --restart always --name mongo mongo';
-
-    // Execute mongo
-    exec(command, function(err, stdout, stderr) {
-
-      if (err != null) {
-        console.log(err);
-        failure(err);
-        return;
-      }
-
-      console.log('Mongo DB : setup complete');
+      console.log("Mongo DB : setup complete!");
 
       success();
 
