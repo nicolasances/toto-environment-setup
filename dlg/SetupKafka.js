@@ -6,6 +6,8 @@ exports.do = function() {
 
   return new Promise(function(success, failure) {
 
+    console.log("Kafka : starting set up ...");
+
     // Setup the command for executing kafka
     var command = '';
 
@@ -46,6 +48,8 @@ exports.do = function() {
           failure(err);
           return;
         }
+
+        console.log("Kafka : setup complete!");
 
         success();
 

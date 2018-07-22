@@ -6,16 +6,12 @@ exports.do = function() {
 
   return new Promise(function(success, failure) {
 
-    console.log('Setting up all the Toto Microservices');
+    console.log('Toto Microservices : starting set up ...');
 
     // 1. Access Github and get the list of Microservices
-    console.log('Retrieving Toto Microservices from Github');
-
     getGithubApis.getApis().then(function(data) {
 
-      console.log("Retrived the following Toto Microservices from Github: ");
-
-      console.log(data);
+      console.log("Toto Microservices : retrived " + data.length + "Toto Microservices from Github.");
 
       // 2. Build and deploy each api
       // Save each promise and then join them
@@ -23,12 +19,16 @@ exports.do = function() {
 
       for (var i = 0; i < data.apis.length; i++) {
 
+        console.log("Toto Microservices : deploying " + data.apis[i].localhost);
+
         buildPromises.push(buildAndDeployMS.do(data.apis[i]));
 
       }
 
       // Wait for all the promises to finish
       Promise.all(buildPromises).then(function() {
+
+        console.log("Toto Microservices : completed deploy of all microservices!");
 
         success();
 

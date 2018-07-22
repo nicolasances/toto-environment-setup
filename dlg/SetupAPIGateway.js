@@ -1,11 +1,14 @@
-var getGithubApis = require('./GetGithubApis');
-var createTykAPI = require('./CreateTykAPI');
+var createAPIs = require('./TykCreateAPIs');
+var reloadTyk = require('./TykReload');
+var createUser = require('./TykCreateUser');
 var exec = require('child_process').exec;
 var http = require('request');
 
 exports.do = function() {
 
   return new Promise(function(success, failure) {
+
+    console.log("Tyk API Gateway : starting setup ...");
 
     // Command
     var command = '';
@@ -27,57 +30,26 @@ exports.do = function() {
     exec(command, function(err, stdout, stderr) {
 
       if (err != null) {
-        console.log('Error while configuring Tyk');
+        console.log('Tyk API Gateway : Error while configuring Tyk');
         console.log(err);
         failure();
         return;
       }
 
-      setTimeout(function() {
+      console.log("Tyk API Gateway : gateway installation complete!");
 
-        // Retrieve all APIs to set on the gateway and set them up
-        getGithubApis.getApis().then(function(data) {
+      // Creating the APIS on the Gateway
+      createAPIs.do().then(function() {
 
-          // Promises array to join all the API creation promises
-          var promises = [];
+        // Reload the gateway
+        reloadTyk.do().then(function() {
 
-          // For each API, create an API on Tyk
-          for (var i = 0; i < data.apis.length; i++) {
-
-            // Create the Tyk API
-            promises.push(createTykAPI.do(data.apis[i]));
-
-          }
-
-          // Wait for all the promises to finish
-          Promise.all(promises).then(function() {
-
-            // Prepare the gateway reload
-            var data = {
-              url : "http://gateway:8080/tyk/reload",
-              method: 'GET',
-              headers : {
-                'User-Agent' : 'node.js',
-                'x-tyk-authorization': 'totocazzo'
-              }
-            };
-
-            console.log('Reloading gateway');
-
-            // Reload the gateway
-            http(data, function(err, resp, body) {
-
-              if (err) console.log(err);
-              console.log(body);
-
-              success();
-            });
-
-          });
+          // Setting up user profiles
+          createUser.do().then(success);
 
         });
 
-      }, 5000);
+      });
 
     });
 

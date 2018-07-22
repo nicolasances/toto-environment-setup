@@ -11,9 +11,6 @@ exports.getApis = function() {
     if (cacheTime != null) {
 
       if (moment().unix() - cacheTime < 4000) {
-
-        console.log("Returning cached API list");
-
         success(cachedApiList);
         return;
       }
@@ -40,8 +37,6 @@ exports.getApis = function() {
         var githubResponse = JSON.parse(body);
 
         if (githubResponse == null || githubResponse.length == 0) {
-
-          console.log("Caching API list");
 
           cachedApiList = {apis : buildApis(repos)};
           cacheTime = moment().unix();

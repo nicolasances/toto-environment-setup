@@ -8,6 +8,8 @@ exports.do = function() {
 
   return new Promise(function(success, failure) {
 
+    console.log('Mongo DB : setting up...');
+
     // Setup the command for executing mongo
     var command = '';
 
@@ -28,6 +30,8 @@ exports.do = function() {
         failure(err);
         return;
       }
+
+      console.log('Mongo DB : setup complete');
 
       success();
 
