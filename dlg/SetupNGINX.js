@@ -31,7 +31,7 @@ exports.do = function(conf) {
     data += '} \r\n';
 
     // Create the file
-    fw.writeFile('/nginx-setup/nginx.conf', data, function(err, data) {
+    fs.writeFile('/nginx-setup/nginx.conf', data, function(err, data) {
 
       if (err) {
         failure(err);
