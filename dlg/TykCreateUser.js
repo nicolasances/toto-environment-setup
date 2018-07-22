@@ -41,8 +41,6 @@ exports.do = function() {
         }
       };
 
-      console.log(key);
-
       // Define the user name
       var user = 'toto';
 

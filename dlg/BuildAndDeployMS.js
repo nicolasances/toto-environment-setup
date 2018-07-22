@@ -21,8 +21,7 @@ exports.do = function(microservice) {
     exec(command, function(err, stdout, stderr) {
 
       if (err != null) {
-        console.log('Could not deploy ' + microservice.localhost);
-        console.log(err);
+        console.log('Toto Microservices : Could not deploy ' + microservice.localhost);
       }
 
       success();

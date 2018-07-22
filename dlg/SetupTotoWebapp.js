@@ -8,6 +8,10 @@ exports.do = function() {
     // Create command
     var command = '';
 
+    // Remove old versions
+    command += 'docker stop toto || true; ';
+    command += 'docker rm toto || true; ';
+
     // Pull the image from
     command += 'docker run -d --network totonet --name toto --restart always nicolasances/toto:latest';
 
@@ -15,7 +19,6 @@ exports.do = function() {
 
       if (err != null) {
         console.log('Could not deploy toto');
-        console.log(err);
       }
 
       success();
