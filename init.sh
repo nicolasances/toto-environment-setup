@@ -7,6 +7,9 @@ mkdir /tyk;
 
 cp tyk.conf /tyk;
 
+# Create the NGINX config file
+touch /nginx-setup/nginx.conf;
+
 # Installing docker
 sudo yum install -y yum-utils device-mapper-persistent-data lvm2;
 sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo;
