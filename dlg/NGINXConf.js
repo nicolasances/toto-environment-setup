@@ -27,6 +27,9 @@ exports.do = function(conf) {
     data += '\t } \r\n';
     data += '} \r\n';
 
+    // Events tag
+    data += 'events {} \r\n';
+
     // Create the file
     fs.writeFile('/nginx-setup/nginx.conf', data, function(err, data) {
 
