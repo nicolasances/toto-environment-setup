@@ -11,7 +11,7 @@ exports.do = function() {
     // 1. Access Github and get the list of Microservices
     getGithubApis.getApis().then(function(data) {
 
-      console.log("Toto Microservices : retreived " + data.apis.length + "Toto Microservices from Github.");
+      console.log("Toto Microservices : retreived " + data.apis.length + " Toto Microservices from Github.");
 
       // 2. Build and deploy each api
       // Save each promise and then join them
