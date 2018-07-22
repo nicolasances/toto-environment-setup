@@ -1,4 +1,9 @@
-var fs = require('fs');
+var createConfFile = require('./NGINXConf');
+var createDockerfile = require('./NGINXDockerfile');
+var stopNGINX = require('./NGINXStop');
+var buildNGINX = require('./NGINXBuild');
+var startNGINX = require('./NGINXStart');
+var exec = require('child_process').exec;
 
 // Set up NGINX
 // The conf object is important: I need the env field to understand whether
@@ -9,40 +14,34 @@ exports.do = function(conf) {
 
     console.log("NGINX : Starting setup...");
 
-    // Create the NGINX configuration data
-    var data = '';
+    // Create the NGINX configuration file
+    createConfFile.do(conf).then(function() {
 
-    // Create the basic server
-    data += 'http { \r\n';
-    data += '\t server { \r\n';
+      // Create the Dockerfile
+      createDockerfile.do().then(function() {
 
-    // Create the toto proxy pass
-    data += '\t\t location /toto/ { \r\n';
-    data += '\t\t\t proxy_pass http://toto/; \r\n';
-    data += '\t\t } \r\n';
+        // Stop NGINX if any
+        stopNGINX.do().then(function() {
 
-    // Create the gateway proxy pass
-    data += '\t\t location /apis/ { \r\n';
-    data += '\t\t\t proxy_pass http://gateway:8080/; \r\n';
-    data += '\t\t } \r\n';
+          // Build docker image
+          buildNGINX.do().then(function() {
 
-    // Close the basic http and server config
-    data += '\t } \r\n';
-    data += '} \r\n';
+            // Start NGINX
+            startNGINX.do().then(function() {
 
-    // Create the file
-    fs.writeFile('/nginx-setup/nginx.conf', data, function(err, data) {
+              console.log("NGINX : setup complete!");
 
-      if (err) {
-        failure(err);
-        return;
-      }
+              success();
 
-      console.log("NGINX : setup complete!");
+            });
 
-      success();
-    })
+          });
 
+        });
+
+      });
+
+    });
 
   });
 
