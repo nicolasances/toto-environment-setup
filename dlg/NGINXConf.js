@@ -1,4 +1,6 @@
 
+var fs = require('fs');
+
 // Create the NGINX conf file
 exports.do = function(conf) {
 
