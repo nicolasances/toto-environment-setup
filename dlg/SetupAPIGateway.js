@@ -41,12 +41,17 @@ exports.do = function() {
       // Creating the APIS on the Gateway
       createAPIs.do().then(function() {
 
-        // Setting up user profiles
-        createUser.do().then(function() {
+        // Reload gateway 
+        reloadTyk.do().then(function() {
 
-          // Reload gateway
-          reloadTyk.do().then(success);
-          
+          // Setting up user profiles
+          createUser.do().then(function() {
+
+            // Reload gateway
+            reloadTyk.do().then(success);
+
+          });
+
         });
 
       });
