@@ -11,21 +11,19 @@ exports.do = function() {
     // Retrieve the APIs that user is going to have access to...
     getGithubApis.getApis().then(function(data) {
 
-      // Create a Map<id, API> of Tyk API objects
-      var apis = new Map();
+      // Create the access_rights object
+      var accessRights = new Object();
 
       // For each API, get the tyk id
       for (var i = 0; i < data.apis.length; i++) {
-        apis.set(data.apis[i].localhost, {
+        accessRights[data.apis[i].localhost] = {
           api_id : data.apis[i].localhost,
           api_name : data.apis[i].name,
           versions : ["Default"]
-        });
+        };
       }
 
       // Now create the whole "create user" object
-      console.log(apis);
-
       var key = {
         "allowance": 1000,
         "rate": 1000,
@@ -36,7 +34,7 @@ exports.do = function() {
         "quota_renews": 1449051461,
         "quota_remaining": -1,
         "quota_renewal_rate": 60,
-        "access_rights": apis,
+        "access_rights": accessRights,
         "meta_data": {},
         "basic_auth_data": {
           "password": "stototo"
