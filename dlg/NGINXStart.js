@@ -9,11 +9,9 @@ exports.do = function(conf) {
 
     // Define volumes for certificates
     var certificateVolume = '';
-    if (conf.ssl) '-v /etc/letsencrypt/archive/' + conf.host + ':/certificates';
+    if (conf.ssl) certificateVolume = '-v /etc/letsencrypt/archive/' + conf.host + ':/certificates';
 
     console.log('NGINX : Starting NGINX...');
-    console.log('NGINX : SSL : ' + conf.ssl);
-    console.log('NGINX : SSL Host : ' + conf.host);
 
     // Start NGINX
     var startCmd = 'docker run -d ' + port + ' ' + certificateVolume + ' --network totonet --restart always --name toto-nginx toto-nginx'
