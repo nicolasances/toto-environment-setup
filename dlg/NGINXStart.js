@@ -1,6 +1,6 @@
 var exec = require('child_process').exec;
 
-exports.do = function() {
+exports.do = function(conf) {
 
   return new Promise(function(success, failure) {
 

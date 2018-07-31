@@ -18,16 +18,16 @@ exports.do = function(conf) {
     createConfFile.do(conf).then(function() {
 
       // Create the Dockerfile
-      createDockerfile.do().then(function() {
+      createDockerfile.do(conf).then(function() {
 
         // Stop NGINX if any
-        stopNGINX.do().then(function() {
+        stopNGINX.do(conf).then(function() {
 
           // Build docker image
-          buildNGINX.do().then(function() {
+          buildNGINX.do(conf).then(function() {
 
             // Start NGINX
-            startNGINX.do().then(function() {
+            startNGINX.do(conf).then(function() {
 
               console.log("NGINX : setup complete!");
 
