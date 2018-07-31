@@ -17,19 +17,22 @@ exports.do = function() {
     };
 
     // Reload the gateway
-    http(data, function(err, resp, body) {
+    setTimeout(function() {
+      
+      http(data, function(err, resp, body) {
 
-      if (err) {
-        console.log(err);
-        failure(err);
-        return;
-      }
+        if (err) {
+          console.log(err);
+          failure(err);
+          return;
+        }
 
-      console.log("Tyk API Gateway : gateway reloaded!");
+        console.log("Tyk API Gateway : gateway reloaded!");
 
-      success();
+        success();
 
-    });
+      });
+    }, 1000);
 
   })
 }
