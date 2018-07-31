@@ -2,6 +2,9 @@
 var fs = require('fs');
 
 // Create the NGINX conf file
+// To configure SSL the following parameters need to be passed:
+//  * conf.ssl (true)
+//  * conf.host (host name)
 exports.do = function(conf) {
 
   return new Promise(function(success, failure) {
@@ -12,6 +15,14 @@ exports.do = function(conf) {
     // Create the basic server
     data += 'http { \r\n';
     data += '\t server { \r\n';
+
+    // Create the SSL stuff
+    if (conf.ssl) {
+      data += '\t\t listen 443 ssl; \r\n';
+      data += '\t\t server_name ' + conf.host + '; \r\n';
+      data += '\t\t ssl_certificate /certificates/fullchain1.pem; \r\n';
+      data += '\t\t ssl_certificate_key /certificates/privkey1.pem; \r\n';
+    }
 
     // Create the toto proxy pass
     data += '\t\t location /toto/ { \r\n';

@@ -5,10 +5,11 @@ exports.do = function() {
   return new Promise(function(success, failure) {
 
     // Define PORT number
-    var port = '-p 80:80';
+    var port = conf.ssl ? '-p 443:443' : '-p 80:80';
 
     // Define volumes for certificates
     var certificateVolume = '';
+    if (conf.ssl) '-v /etc/letsencrypt/archive/' + conf.host + ':/certificates';
 
     console.log('NGINX : Starting NGINX...');
 
