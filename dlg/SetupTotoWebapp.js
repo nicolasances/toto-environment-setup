@@ -6,16 +6,23 @@ exports.do = function(conf) {
 
     console.log("Toto Webapp : Starting setup...");
 
+    // Create the data to pass to the Toto CI Release MS
+    var body = {
+      env: conf.env,
+      ssl: conf.ssl,
+      host: conf.host,
+      microservice: 'toto'
+    };
+
     // Create the data to call the Toto CI Release Microservice
     var req = {
       url: 'http://toto-ci-release:8080/releases',
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify(conf)
-    }
+      body: JSON.stringify(body)
+    };
 
     // Call the API
     http(req, function(error, response, body) {
