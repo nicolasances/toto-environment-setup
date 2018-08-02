@@ -1,31 +1,32 @@
+var http = require('request');
 
-var exec = require('child_process').exec;
-
-exports.do = function() {
+exports.do = function(conf) {
 
   return new Promise(function(success, failure) {
 
-    // Create command
-    var command = '';
+    console.log("Toto Webapp : Starting setup...");
 
-    // Remove old versions
-    command += 'docker stop toto || true; ';
-    command += 'docker rm toto || true; ';
+    // Create the data to call the Toto CI Release Microservice
+    var req = {
+      url: 'http://toto-ci-release:8080/releases',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(conf)
+    }
 
-    // Pull the image from
-    command += 'docker run -d --network totonet --name toto --restart always nicolasances/toto:latest';
+    // Call the API
+    http(req, function(error, response, body) {
 
-    exec(command, function(err, stdout, stderr) {
+      if (error) {console.log("Toto Webapp : Setup failed!!"); console.log(error); failure(); return;}
 
-      if (err != null) {
-        console.log('Could not deploy toto');
-      }
+      console.log("Toto Webapp : Setup successfull!");
 
       success();
 
     });
-
-    success();
 
   });
 

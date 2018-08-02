@@ -15,8 +15,12 @@ exports.do = function(microservice) {
     command += 'docker stop ' + microservice.localhost + ' || true; ';
     command += 'docker rm ' + microservice.localhost + ' || true; ';
 
+    // Eventually start sharing docker.sock
+    var sock = '';
+    if (microservice.localhost.startsWith('toto-ci-')) sock = ' -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):/usr/bin/docker ';
+
     // Pull the image from
-    command += 'docker run -d --network totonet --name ' + microservice.localhost + ' --restart always nicolasances/' + microservice.localhost + ':latest';
+    command += 'docker run -d --network totonet --name ' + microservice.localhost + sock + ' --restart always nicolasances/' + microservice.localhost + ':latest';
 
     exec(command, function(err, stdout, stderr) {
 

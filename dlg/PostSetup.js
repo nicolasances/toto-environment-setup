@@ -36,13 +36,13 @@ exports.do = function(conf) {
     // 5. Setup API Gateway
     promises.push(setupAPIGateway.do());
 
-    // 6. Setup Toto Webapp
-    promises.push(setupTotoWebapp.do());
-
     // Wait for promises to complete and ...
     Promise.all(promises).then(function() {
 
       promises = [];
+
+      // 6. Setup Toto Webapp (through CI Microservice, that's why I'm waiting this moment)
+      promises.push(setupTotoWebapp.do());
 
       // 7. Restore Mongo data
       promises.push(restoreMongo.do());
@@ -52,6 +52,8 @@ exports.do = function(conf) {
 
       // Wait for everything to finish and you're done!!
       Promise.all(promises).then(function() {
+
+        console.log("Toto Environment setup complete!");
 
         success({completed: true, message: 'Toto Environment setup complete!'});
 
