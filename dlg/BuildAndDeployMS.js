@@ -14,7 +14,7 @@ exports.do = function(microservice) {
     // Remove miroservice image if it already existed
     command += 'docker stop ' + microservice.localhost + ' || true; ';
     command += 'docker rm ' + microservice.localhost + ' || true; ';
-    command += 'docker rm1 nicolasances/' + microservice.localhost + ' || true; ';
+    command += 'docker rmi nicolasances/' + microservice.localhost + ' || true; ';
 
     // Eventually start sharing docker.sock
     var sock = '';
