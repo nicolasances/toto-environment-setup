@@ -42,7 +42,7 @@ exports.do = function(conf) {
       promises = [];
 
       // 6. Setup Toto Webapp (through CI Microservice, that's why I'm waiting this moment)
-      promises.push(setupTotoWebapp.do());
+      promises.push(setupTotoWebapp.do(conf));
 
       // 7. Restore Mongo data
       promises.push(restoreMongo.do());
