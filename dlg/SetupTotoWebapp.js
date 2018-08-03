@@ -27,9 +27,6 @@ exports.do = function(conf) {
     // Call the API
     http(req, function(error, response, body) {
 
-      console.log(body);
-      console.log(response);
-
       if (error) {console.log("Toto Webapp : Setup failed!!"); console.log(error); failure(); return;}
 
       console.log("Toto Webapp : Setup successfull!");
