@@ -11,7 +11,9 @@ exports.do = function(conf) {
       env: conf.env,
       ssl: conf.ssl,
       host: conf.host,
-      microservice: 'toto'
+      microservice: 'toto',
+      dockerhubUser: conf.dockerhubUser,
+      dockerhubPwd: conf.dockerhubPwd
     };
 
     // Create the data to call the Toto CI Release Microservice
