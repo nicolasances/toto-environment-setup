@@ -21,8 +21,6 @@ exports.do = function(api, conf) {
     // Call the API and check the status
     http(req, function(err, resp, body) {
 
-      console.log(resp);
-
       // If there's a problem check if the API has actually been deployed
       if (err || resp.statusCode == 404 || body == null || JSON.parse(body).status != 'running') {
 
