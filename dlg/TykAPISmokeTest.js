@@ -25,6 +25,7 @@ exports.do = function(api, conf) {
       if (err || resp.statusCode == 404 || body == null || JSON.parse(body).status != 'running') {
 
         smoke.do(api).then(() => {
+          console.log('Tyk API Gateway : Smoke test failed on Tyk API ' + api.localhost);
           failure({error: 'API ' + api.name + ' didn\'t pass the smoke test on Tyk.'});
         }, () => {
           console.log('Tyk API Gateway : Smoke test failed on Tyk API ' + api.localhost + ' but that API hasn\'t been deployed as a container, so.... kinda ok..');
