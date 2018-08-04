@@ -2,7 +2,7 @@ var http = require('request');
 var getGithubApis = require('./GetGithubApis');
 
 // Create the Tyk user
-exports.do = function() {
+exports.do = function(conf) {
 
   return new Promise(function(success, error) {
 
@@ -37,7 +37,7 @@ exports.do = function() {
         "access_rights": accessRights,
         "meta_data": {},
         "basic_auth_data": {
-          "password": "stototo"
+          "password": conf.apiAuth.pwd
         }
       };
 
@@ -46,7 +46,7 @@ exports.do = function() {
 
       // Create the user on Tyk
       var data = {
-        url : "http://gateway:8080/tyk/keys/" + user,
+        url : "http://gateway:8080/tyk/keys/" + conf.apiAuth.user,
         method: 'POST',
         headers : {
           'User-Agent' : 'node.js',

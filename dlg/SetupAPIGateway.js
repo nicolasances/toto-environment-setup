@@ -4,7 +4,7 @@ var createUser = require('./TykCreateUser');
 var exec = require('child_process').exec;
 var http = require('request');
 
-exports.do = function() {
+exports.do = function(conf) {
 
   return new Promise(function(success, failure) {
 
@@ -39,22 +39,19 @@ exports.do = function() {
       console.log("Tyk API Gateway : gateway installation complete!");
 
       // Creating the APIS on the Gateway
-      createAPIs.do().then(function() {
+      createAPIs.do().then(() => {
 
-        // Reload gateway 
-        reloadTyk.do().then(function() {
+        reloadTyk.do();
 
-          // Setting up user profiles
-          createUser.do().then(function() {
+      }).then(() => {
 
-            // Reload gateway
-            reloadTyk.do().then(success);
+        createUser.do(conf);
 
-          });
+      }).then(() => {
 
-        });
+        reloadTyk.do();
 
-      });
+      }).then(success);
 
     });
 
