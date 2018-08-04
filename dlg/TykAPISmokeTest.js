@@ -24,7 +24,7 @@ exports.do = function(api, conf) {
       console.log(resp);
 
       // If there's a problem check if the API has actually been deployed
-      if (err || resp.status == 404 || body == null || JSON.parse(body).status != 'running') {
+      if (err || resp.statusCode == 404 || body == null || JSON.parse(body).status != 'running') {
 
         smoke.do(api).then(() => {
           failure({error: 'API ' + api.name + ' didn\'t pass the smoke test on Tyk.'});
