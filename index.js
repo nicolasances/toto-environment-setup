@@ -26,7 +26,11 @@ app.get('/', function(req, res) {res.send({api: apiName, status: 'running'});});
  * Receives a notification that a build on dockerhub has been performed.
  */
 app.post('/setup', function(req, res) {
-  postSetup.do(req.body).then(function(result) {res.status(200).send(result);});
+  postSetup.do(req.body).then(function(result) {
+    res.status(200).send(result);
+  }, function(error) {
+    res.status(error.status).send(error);
+  });
 });
 
 app.listen(8080, function() {
