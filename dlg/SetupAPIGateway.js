@@ -3,6 +3,7 @@ var reloadTyk = require('./TykReload');
 var createUser = require('./TykCreateUser');
 var exec = require('child_process').exec;
 var http = require('request');
+var smokeAPIs = require('./TykAPIsSmokeTest');
 
 exports.do = function(conf) {
 
@@ -51,7 +52,11 @@ exports.do = function(conf) {
 
         return reloadTyk.do();
 
-      }).then(success);
+      }).then(() => {
+
+        return smokeAPIs.do(conf);
+
+      }).then(success, (error) => {console.log(error); failure(error);});
 
     });
 
