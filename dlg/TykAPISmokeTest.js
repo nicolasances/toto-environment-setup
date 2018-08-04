@@ -15,6 +15,8 @@ exports.do = function(api, conf) {
       }
     }
 
+    console.log('Tyk API Gateway : smoke testing API ' + api.name);
+
     // Call the API and check the status
     http(req, function(err, resp, body) {
 

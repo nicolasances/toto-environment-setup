@@ -17,7 +17,7 @@ exports.do = function(conf) {
       for (var i = 0; i < data.apis.length; i++) {
 
         // Create the Tyk API
-        promises.push(smoke.do(data.apis[i]));
+        promises.push(smoke.do(data.apis[i], conf));
 
       }
 
