@@ -19,7 +19,7 @@ exports.do = function(conf) {
     // Check that the provided conf has the required data
     if (conf == null) {failure({status: 400, error: 'No configuration provided'}); return;}
     if (conf.env == null) {failure({status: 400, error: 'No "env" field provided in the configuration object. Please provide an env: "prod" or "dev"'}); return;}
-    if (conf.dockerhubUser == null || conf.dockerhubPwd) {failure({status: 400, error: 'No Docker Hub credentials passed as dockerhubUser and dockerhubPwd'}); return;}
+    if (conf.dockerhubUser == null || conf.dockerhubPwd == null) {failure({status: 400, error: 'No Docker Hub credentials passed as dockerhubUser and dockerhubPwd'}); return;}
     if (conf.host == null) {failure({status: 400, error: 'No \'host\' provided in the body'}); return;}
 
     // Prepare the list of promises, since the installation is going to do everything
