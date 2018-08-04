@@ -56,7 +56,7 @@ exports.do = function(conf) {
 
         return smokeAPIs.do(conf);
 
-      }).then(success, (error) => {console.log(error); failure(error);});
+      }).then(success, () => {failure();});
 
     });
 

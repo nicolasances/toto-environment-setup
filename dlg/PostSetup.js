@@ -58,9 +58,9 @@ exports.do = function(conf) {
 
         console.log("Toto Environment setup complete!");
 
-        success({completed: true, message: 'Toto Environment setup complete!'});
+        success({status: 200, completed: true, message: 'Toto Environment setup complete!'});
 
-      });
+      }, () => {failure({status: 500, completed: false, message: 'Toto Environment setup failed...'})});
     });
 
   });

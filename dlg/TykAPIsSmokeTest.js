@@ -22,12 +22,15 @@ exports.do = function(conf) {
       }
 
       // Wait for all the promises to finish
-      Promise.all(promises).then(function() {
+      Promise.all(promises).then(() => {
 
         console.log("Tyk API Gateway : all APIs have been smoke tested. Everything fine.");
 
         success();
 
+      }, () => {
+
+        console.log('Tyk API Gateway : some APIs haven\'t the smoke test...');
       });
 
     });
