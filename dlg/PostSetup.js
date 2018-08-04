@@ -50,15 +50,17 @@ exports.do = function(conf) {
       // 7. Restore Mongo data
       promises.push(restoreMongo.do());
 
-      // 8. Setup NGINX
-      promises.push(setupNGINX.do(conf));
-
       // Wait for everything to finish and you're done!!
       Promise.all(promises).then(function() {
 
-        console.log("Toto Environment setup complete!");
+        // 8. Setup NGINX
+        setupNGINX.do(conf).then(() => {
 
-        success({status: 200, completed: true, message: 'Toto Environment setup complete!'});
+          console.log("Toto Environment setup complete!");
+
+          success({status: 200, completed: true, message: 'Toto Environment setup complete!'});
+
+        }, () => {failure({status: 500, completed: false, message: 'Toto Environment setup failed...'})});
 
       }, () => {failure({status: 500, completed: false, message: 'Toto Environment setup failed...'})});
     });
