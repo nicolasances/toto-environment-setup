@@ -41,15 +41,15 @@ exports.do = function(conf) {
       // Creating the APIS on the Gateway
       createAPIs.do().then(() => {
 
-        reloadTyk.do();
+        return reloadTyk.do();
 
       }).then(() => {
 
-        createUser.do(conf);
+        return createUser.do(conf);
 
       }).then(() => {
 
-        reloadTyk.do();
+        return reloadTyk.do();
 
       }).then(success);
 
