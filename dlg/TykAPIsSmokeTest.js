@@ -1,7 +1,7 @@
 var getGithubApis = require('./GetGithubApis');
 var smoke = require('./TykAPISmokeTest');
 
-exports.do = function(conf) {{
+exports.do = function(conf) {
 
   return new Promise(function(success, failure) {
 
@@ -32,7 +32,6 @@ exports.do = function(conf) {{
 
     });
 
-
-  })
+  });
 
 }
