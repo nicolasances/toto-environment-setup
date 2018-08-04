@@ -36,13 +36,13 @@ exports.do = function(conf) {
     // 4. Setup Toto Microservices
     promises.push(setupMicroservices.do());
 
-    // 5. Setup API Gateway
-    promises.push(setupAPIGateway.do(conf));
-
     // Wait for promises to complete and ...
     Promise.all(promises).then(function() {
 
       promises = [];
+
+      // 5. Setup API Gateway
+      promises.push(setupAPIGateway.do(conf));
 
       // 6. Setup Toto Webapp (through CI Microservice, that's why I'm waiting this moment)
       promises.push(setupTotoWebapp.do(conf));

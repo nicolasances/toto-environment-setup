@@ -1,3 +1,4 @@
+var smoke = require('./TotoMicroserviceSmoke');
 var http = require('request');
 
 // Needs the config to have the apiAuth data
@@ -15,18 +16,24 @@ exports.do = function(api, conf) {
       }
     }
 
-    console.log('Tyk API Gateway : smoke testing API ' + api.name);
+    console.log('Tyk API Gateway : smoke testing API ' + api.localhost);
 
     // Call the API and check the status
     http(req, function(err, resp, body) {
 
-      if (err) {failure({error: 'API ' + api.name + ' didn\'t pass the smoke test on Tyk. ' + err}); return;}
-      if (body == null) {failure({error: 'API ' + api.name + ' didn\'t pass the smoke test on Tyk.'}); return;}
+      // If there's a problem check if the API has actually been deployed
+      if (err || body == null || JSON.parse(body).status != 'running') {
 
-      if (body.status == 'running') {success(); return;}
+        smoke.do(api).then(() => {
+          failure({error: 'API ' + api.name + ' didn\'t pass the smoke test on Tyk.'});
+        }, () => {
+          console.log('Tyk API Gateway : Smoke test failed on Tyk API ' + api.localhost + ' but that API hasn\'t been deployed as a container, so.... kinda ok..');
+          success();
+        })
 
-      failure({error: 'API ' + api.name + ' didn\'t pass the smoke test on Tyk.'});
-
+      }
+      else success();
+      
     });
 
   });
