@@ -1,6 +1,6 @@
 
 var getGithubApis = require('./GetGithubApis');
-var buildAndDeployMS = require('./TotoMicroserviceRelease');
+var releaseMs = require('./TotoMicroserviceRelease');
 
 exports.do = function() {
 
@@ -22,7 +22,7 @@ exports.do = function() {
         console.log("Toto Microservices : deploying " + data.apis[i].localhost);
 
         // Build and release the microservice
-        buildPromises.push(buildAndDeployMS.do(data.apis[i]));
+        buildPromises.push(releaseMs.do(data.apis[i]));
 
       }
 

@@ -11,6 +11,9 @@ exports.do = function(api) {
     var req = {
       url : 'http://toto-ci-release:8080/releases',
       method : 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({
         microservice: api.localhost
       })
