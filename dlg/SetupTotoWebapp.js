@@ -12,8 +12,6 @@ exports.do = function(conf) {
       ssl: conf.ssl,
       host: conf.host,
       microservice: 'toto',
-      dockerhubUser: conf.dockerhubUser,
-      dockerhubPwd: conf.dockerhubPwd,
       apiAuth: conf.apiAuth
     };
 
