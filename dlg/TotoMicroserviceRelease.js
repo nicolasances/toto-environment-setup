@@ -22,51 +22,49 @@ exports.do = function(api) {
     }
 
     // Call the API
-    http(req, (err, resp, body) => {
+    http(req, (err, resp, body) => {});
 
-      // Function to check the release status
-      var getStatus = function(microservice) {
+    // Function to check the release status
+    var getStatus = function(microservice) {
 
-        return new Promise(function(success, failure) {
+      return new Promise(function(success, failure) {
 
-          // Prepare the polling request
-          var r = {
-            url : 'http://toto-ci-release:8080/releases/' + microservice,
-            method : 'GET',
-            headers : {
-              'Accept' : 'application/json'
-            }
-          };
+        // Prepare the polling request
+        var r = {
+          url : 'http://toto-ci-release:8080/releases/' + microservice,
+          method : 'GET',
+          headers : {
+            'Accept' : 'application/json'
+          }
+        };
 
-          // Retrieve the status
-          http(r, (err, resp, body) => {
+        // Retrieve the status
+        http(r, (err, resp, body) => {
 
-            success(JSON.parse(body));
-
-          });
-        });
-
-      }
-
-      // function for polling the status of the release
-      var poll = function() {
-
-        getStatus(api.localhost).then((result) => {
-
-          if (result.satus == 'RELEASED') {success(); return;}
-
-          console.log(result);
-
-          setTimeout(poll, 1000);
+          success(JSON.parse(body));
 
         });
+      });
 
-      }
+    }
 
-      // Starting the polling to check the status of the microservice deployment
-      poll();
+    // function for polling the status of the release
+    var poll = function() {
 
-    });
+      getStatus(api.localhost).then((result) => {
+
+        if (result.satus == 'RELEASED') {success(); return;}
+
+        console.log(result);
+
+        setTimeout(poll, 1000);
+
+      });
+
+    }
+
+    // Starting the polling to check the status of the microservice deployment
+    poll();
 
   });
 
