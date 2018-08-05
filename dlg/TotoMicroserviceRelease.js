@@ -7,6 +7,8 @@ exports.do = function(api) {
 
   return new Promise(function(success, failure) {
 
+    var currentReleaseStatus = '';
+
     // Preparing the call
     var req = {
       url : 'http://toto-ci-release:8080/releases',
@@ -52,6 +54,8 @@ exports.do = function(api) {
         getStatus(api.localhost).then((result) => {
 
           if (result.satus == 'RELEASED') {success(); return;}
+
+          console.log(result.status);
 
           setTimeout(poll, 1000);
 
