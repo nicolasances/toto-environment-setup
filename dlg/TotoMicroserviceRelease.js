@@ -57,7 +57,7 @@ exports.do = function(api) {
 
         currentReleaseStatus = result.status;
 
-        if (result.satus == 'RELEASED') {success(); return;}
+        if (result.satus == 'RELEASED') {console.log('Toto Microservices : [' + result.microservice + '] - exiting....'); success(); return;}
 
         setTimeout(poll, 1000);
 
