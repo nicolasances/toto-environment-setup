@@ -27,7 +27,7 @@ exports.do = function(api) {
     // Function to check the release status
     var getStatus = function(microservice) {
 
-      return new Promise(function(success, failure) {
+      return new Promise(function(ok, fail) {
 
         // Prepare the polling request
         var r = {
@@ -41,7 +41,7 @@ exports.do = function(api) {
         // Retrieve the status
         http(r, (err, resp, body) => {
 
-          success(JSON.parse(body));
+          ok(JSON.parse(body));
 
         });
       });
