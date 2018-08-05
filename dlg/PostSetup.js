@@ -67,7 +67,8 @@ exports.do = function(conf) {
         }, () => {failure({status: 500, completed: false, message: 'Toto Environment setup failed...'})});
 
       }, () => {failure({status: 500, completed: false, message: 'Toto Environment setup failed...'})});
-    });
+      
+    }, () => {failure({status: 500, completed: false, message: 'Toto Environment setup failed...'})});
 
   });
 }
