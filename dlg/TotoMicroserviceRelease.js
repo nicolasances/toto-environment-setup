@@ -55,7 +55,7 @@ exports.do = function(api) {
 
           if (result.satus == 'RELEASED') {success(); return;}
 
-          console.log(result.status);
+          console.log(result);
 
           setTimeout(poll, 1000);
 
