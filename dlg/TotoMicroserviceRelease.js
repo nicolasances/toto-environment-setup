@@ -34,6 +34,8 @@ exports.do = function(api) {
         return;
       }
 
+      success();
+
     });
 
   });
