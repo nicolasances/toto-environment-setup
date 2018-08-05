@@ -10,7 +10,12 @@ This script will:
  * Install Docker CE
  * Enable and start the Docker service
  * Create the required Docker networks
- * Starting the `toto-environment-setup` microservice (listens on 9999)
+ * Start the Toto CI microservices
+ * Start the `toto-environment-setup` microservice (listens on 9999)
+
+To launch the script:
+
+    sh init.sh <dockerhub username> <dockerhub pswd>
 
 ## Using the toto-environment-setup microservice
 

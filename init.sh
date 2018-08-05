@@ -19,6 +19,15 @@ systemctl start docker;
 # Create the network for Toto
 docker network create totonet;
 
+# Building CI microservices
+# 1. toto-ci-release
+mkdir /toto-ci-release;
+git clone https://github.com/nicolasances/toto-ci-release.git /toto-ci-release;
+cd /toto-ci-release;
+docker build -t nicolasances/toto-ci-release .;
+docker run -d -e DOCKERHUBUSR=$1 -e DOCKERHUBPWD=$2 --network totonet -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):/usr/bin/docker --name toto-ci-release nicolasances/toto-ci-release;
+echo 'CI Microservice : toto-ci-release has been built';
+
 # Starting this microservice
 docker run -d -p 9999:8080 --network totonet -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):/usr/bin/docker -v /nginx-setup:/nginx-setup --name toto-environment-setup nicolasances/toto-environment-setup:latest;
 

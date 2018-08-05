@@ -68,7 +68,6 @@ exports.getApis = function() {
 
         if (msName.indexOf('toto-ms-') >= 0) apiName = msName.substr('toto-ms-'.length);
         else if (msName.indexOf('toto-nodems-') >= 0) apiName = msName.substr('toto-nodems-'.length);
-        else if (msName.indexOf('toto-ci-') >= 0) apiName = msName.substr('toto-ci-'.length);
 
         if (apiName != null) apis.push({name : apiName, localhost : msName, repo: 'https://github.com/nicolasances/' + msName + '.git'});
 
