@@ -22,11 +22,7 @@ exports.do = function() {
         console.log("Toto Microservices : deploying " + data.apis[i].localhost);
 
         // Build and release the microservice
-        var p = releaseMs.do(data.apis[i]);
-
-        buildPromises.push(p);
-
-        p.then((result) => {console.log("Toto Microservices : " + data.apis[i].localhost + " successfully deployed!");});
+        buildPromises.push(releaseMs.do(data.apis[i]));
 
       }
 
