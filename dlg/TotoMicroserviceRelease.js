@@ -13,7 +13,7 @@ exports.do = function(api) {
       method : 'POST',
       body: JSON.stringify({
         microservice: api.localhost
-      });
+      })
     }
 
     // Call the API
