@@ -40,23 +40,27 @@ exports.do = function(conf) {
       console.log("Tyk API Gateway : gateway installation complete!");
 
       // Creating the APIS on the Gateway
-      createAPIs.do().then(() => {
+      setTimeout(() => {
 
-        return reloadTyk.do();
+        createAPIs.do().then(() => {
 
-      }).then(() => {
+          return reloadTyk.do();
 
-        return createUser.do(conf);
+        }).then(() => {
 
-      }).then(() => {
+          return createUser.do(conf);
 
-        return reloadTyk.do();
+        }).then(() => {
 
-      }).then(() => {
+          return reloadTyk.do();
 
-        return smokeAPIs.do(conf);
+        }).then(() => {
 
-      }).then(success, () => {failure();});
+          return smokeAPIs.do(conf);
+
+        }).then(success, () => {failure();});
+        
+      }, 3000);
 
     });
 
