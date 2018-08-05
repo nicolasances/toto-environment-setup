@@ -6,6 +6,7 @@ var setupAPIGateway = require('./SetupAPIGateway');
 var setupTotoWebapp = require('./SetupTotoWebapp');
 var setupNGINX = require('./SetupNGINX');
 var restoreMongo = require('./MongoRestore');
+var scheduleMongoDump = require('./MongoScheduleDump');
 
 /**
  * This Microservice just sets up the whole Toto Environment
@@ -50,10 +51,13 @@ exports.do = function(conf) {
       // 7. Restore Mongo data
       promises.push(restoreMongo.do());
 
+      // 8. Set the dump schedule for Mongo
+      promises.push(scheduleMongoDump.do(conf));
+
       // Wait for everything to finish and you're done!!
       Promise.all(promises).then(function() {
 
-        // 8. Setup NGINX
+        // 9. Setup NGINX
         setupNGINX.do(conf).then(() => {
 
           console.log("Toto Environment setup complete!");

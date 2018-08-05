@@ -11,7 +11,7 @@ exports.do = function() {
     console.log('Mongo DB : setting up...');
 
     // Install Mongo DB
-    installMongo.do().then(function() {
+    installMongo.do().then(() => {
 
       console.log("Mongo DB : setup complete!");
 
