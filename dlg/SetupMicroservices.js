@@ -33,7 +33,7 @@ exports.do = function() {
 
         success();
 
-      });
+      }, failure);
 
     });
 

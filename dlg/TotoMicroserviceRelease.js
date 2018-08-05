@@ -20,7 +20,8 @@ exports.do = function(api) {
     http(req, (err, resp, body) => {
 
       if (err || resp.statusCode == 500) {
-        console.error(err);
+        if (err) console.error(err);
+        if (resp.statusCode == 500) console.log(body);
         failure({api: api.localhost, deployed: false, message: 'Couldn\'t release ' + api.localhost});
         return;
       }
