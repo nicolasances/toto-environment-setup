@@ -22,15 +22,14 @@ exports.do = function(api) {
     // Call the API
     http(req, (err, resp, body) => {
 
-      // Starting the polling to check the status of the microservice deployment
-      var status = null;
-      while (status != 'RELEASED') {
+      // Function to check the release status
+      var getStatus = function(microservice) {
 
-        setTimeout(() => {
+        return new Promise(function(success, failure) {
 
           // Prepare the polling request
           var r = {
-            url : 'http://toto-ci-release:8080/releases/' + api.localhost,
+            url : 'http://toto-ci-release:8080/releases/' + microservice,
             method : 'GET',
             headers : {
               'Accept' : 'application/json'
@@ -40,18 +39,28 @@ exports.do = function(api) {
           // Retrieve the status
           http(r, (err, resp, body) => {
 
-            var response = JSON.parse(body);
-
-            if (response.status != status) console.log('[' + api.localhost + '] - ' + response.status);
-
-            if (body) status = response.status;
+            success(JSON.parse(body));
 
           });
+        });
 
-        }, 1000);
       }
 
-      success();
+      // function for polling the status of the release
+      var poll = function() {
+
+        getStatus(api.localhost).then((result) => {
+
+          if (result.satus == 'RELEASED') {success(); return;}
+
+          setTimeout(poll, 1000);
+
+        });
+
+      }
+
+      // Starting the polling to check the status of the microservice deployment
+      poll();
 
     });
 
