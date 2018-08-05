@@ -53,9 +53,11 @@ exports.do = function(api) {
 
       getStatus(api.localhost).then((result) => {
 
-        if (result.satus == 'RELEASED') {success(); return;}
+        if (currentReleaseStatus != result.status) console.log("Toto Microservices : [" + result.microservice + "] - Status " + result.status);
 
-        console.log(result);
+        currentReleaseStatus = result.status;
+
+        if (result.satus == 'RELEASED') {success(); return;}
 
         setTimeout(poll, 1000);
 
