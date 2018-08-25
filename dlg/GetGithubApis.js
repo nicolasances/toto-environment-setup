@@ -15,8 +15,6 @@ exports.getApis = function() {
 
     http(data, function(err, response, body) {
 
-      console.log(body);
-
       if (response.statusCode == 200) success(body);
       else failure(body);
     });
