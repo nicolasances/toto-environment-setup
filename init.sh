@@ -1,4 +1,8 @@
 
+# Request user dockerhub credentials
+read -p 'Dockerhub User: ' dockerhubUser;
+read -p 'Dockerhub Pswd: ' dockerhubPassword;
+
 # Creating required host folders
 mkdir /mongo-setup;
 mkdir /mongo-data;
@@ -25,7 +29,7 @@ mkdir /toto-ci-release;
 git clone https://github.com/nicolasances/toto-ci-release.git /toto-ci-release;
 cd /toto-ci-release;
 docker build -t nicolasances/toto-ci-release .;
-docker run -d -e DOCKERHUBUSR=$1 -e DOCKERHUBPWD=$2 --network totonet -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):/usr/bin/docker --name toto-ci-release nicolasances/toto-ci-release;
+docker run -d -e DOCKERHUBUSR=$dockerhubUser -e DOCKERHUBPWD=$dockerhubPassword --network totonet -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):/usr/bin/docker --name toto-ci-release nicolasances/toto-ci-release;
 echo 'CI Microservice : toto-ci-release has been built';
 
 # Starting this microservice
