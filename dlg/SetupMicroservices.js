@@ -19,6 +19,9 @@ exports.do = function() {
 
       for (var i = 0; i < data.apis.length; i++) {
 
+        // Exclude toto-ci apis since they have already been deployed through init.sh
+        if (data.apis[i].type == 'toto-ci') continue;
+
         console.log("Toto Microservices : deploying " + data.apis[i].localhost);
 
         // Build and release the microservice
