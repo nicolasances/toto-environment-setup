@@ -15,7 +15,9 @@ This script will:
 
 To launch the script:
 
-    sh init.sh <dockerhub username> <dockerhub pswd>
+    sh init.sh
+
+The script will ask for the Dockerhub username and password
 
 ## Using the toto-environment-setup microservice
 
