@@ -30,7 +30,7 @@ exports.do = function(api) {
         }
       },
       "CORS": {
-        "enable": true,
+        "enable": false,
         "allowed_origins": [
           "*"
         ],
@@ -39,7 +39,7 @@ exports.do = function(api) {
         "exposed_headers": [],
         "allow_credentials": false,
         "max_age": 24,
-        "options_passthrough": false,
+        "options_passthrough": true,
         "debug": false
       },
       "proxy": {
