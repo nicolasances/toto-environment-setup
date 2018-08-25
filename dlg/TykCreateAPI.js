@@ -29,6 +29,19 @@ exports.do = function(api) {
           }
         }
       },
+      "CORS": {
+        "enable": true,
+        "allowed_origins": [
+          *
+        ],
+        "allowed_methods": ["OPTIONS", "GET", "PUT", "POST", "DELETE"],
+        "allowed_headers": ["Accept", "Content-Type", "Authorization"],
+        "exposed_headers": [],
+        "allow_credentials": false,
+        "max_age": 24,
+        "options_passthrough": false,
+        "debug": false
+      },
       "proxy": {
         "listen_path": "/" + api.name + "/",
         "target_url": "http://" + api.localhost + ":8080/",
