@@ -32,7 +32,7 @@ exports.do = function(api) {
       "CORS": {
         "enable": true,
         "allowed_origins": [
-          *
+          "*"
         ],
         "allowed_methods": ["OPTIONS", "GET", "PUT", "POST", "DELETE"],
         "allowed_headers": ["Accept", "Content-Type", "Authorization"],
