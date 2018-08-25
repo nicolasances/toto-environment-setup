@@ -23,7 +23,7 @@ exports.do = function(conf) {
     command += 'docker rm redis || true; ';
 
     // Install REDIS
-    command += 'docker run -itd --network totonet --name redis redis; ';
+    command += 'docker run -itd --restart always --network totonet --name redis redis; ';
 
     // Install Tyk Gateway
     command += 'docker run -itd --network totonet --name gateway --restart always -e TYKSECRET=totocazzo -e TYKLISTENPORT=8080 -v /tyk/tyk.conf:/opt/tyk-gateway/tyk.conf tykio/tyk-gateway; ';
@@ -59,7 +59,7 @@ exports.do = function(conf) {
           return smokeAPIs.do(conf);
 
         }).then(success, () => {failure();});
-        
+
       }, 3000);
 
     });
