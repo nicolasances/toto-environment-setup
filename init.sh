@@ -1,7 +1,7 @@
 
 # Request user dockerhub credentials
 read -p 'Dockerhub User: ' dockerhubUser;
-read -p 'Dockerhub Pswd: ' dockerhubPassword;
+read  -p 'Dockerhub Pswd: ' -s dockerhubPassword;
 
 # Creating required host folders
 mkdir /mongo-setup;
