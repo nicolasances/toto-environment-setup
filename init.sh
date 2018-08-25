@@ -32,6 +32,14 @@ docker build -t nicolasances/toto-ci-release .;
 docker run -d -e DOCKERHUBUSR=$dockerhubUser -e DOCKERHUBPWD=$dockerhubPassword --network totonet -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):/usr/bin/docker --name toto-ci-release nicolasances/toto-ci-release;
 echo 'CI Microservice : toto-ci-release has been built';
 
+# 2. toto-ci-api-list
+mkdir /toto-ci-api-list;
+git clone https://github.com/nicolasances/toto-ci-release.git /toto-ci-api-list;
+cd /toto-ci-api-list;
+docker build -t nicolasances/toto-ci-api-list .;
+docker run -d --network totonet --name toto-ci-api-list nicolasances/toto-ci-api-list;
+echo 'CI Microservice : toto-ci-api-list has been built';
+
 # Starting this microservice
 docker run -d -p 9999:8080 --network totonet -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):/usr/bin/docker -v /nginx-setup:/nginx-setup --name toto-environment-setup nicolasances/toto-environment-setup:latest;
 
