@@ -34,7 +34,7 @@ echo 'CI Microservice : toto-ci-release has been built';
 
 # 2. toto-ci-api-list
 mkdir /toto-ci-api-list;
-git clone https://github.com/nicolasances/toto-ci-release.git /toto-ci-api-list;
+git clone https://github.com/nicolasances/toto-ci-api-list.git /toto-ci-api-list;
 cd /toto-ci-api-list;
 docker build -t nicolasances/toto-ci-api-list .;
 docker run -d --network totonet --name toto-ci-api-list nicolasances/toto-ci-api-list;
