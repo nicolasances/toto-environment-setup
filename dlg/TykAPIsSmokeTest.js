@@ -16,6 +16,9 @@ exports.do = function(conf) {
       // For each API, create an API on Tyk
       for (var i = 0; i < data.apis.length; i++) {
 
+        // Don't smoke test toto-web webapp microservices
+        if (data.apis[i].type == 'toto-web') continue;
+
         // Create the Tyk API
         promises.push(smoke.do(data.apis[i], conf));
 
