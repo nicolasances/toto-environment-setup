@@ -16,7 +16,7 @@ exports.do = function(conf) {
       headers: {
         'Content-Type' : 'application/json'
       },
-      body: JSON.stringify({env: conf.env, cron: conf.dataDumpCron})
+      body: JSON.stringify({env: process.env.SERVERENV, cron: conf.dataDumpCron})
     };
 
     // Send request
