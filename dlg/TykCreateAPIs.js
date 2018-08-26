@@ -17,6 +17,9 @@ exports.do = function() {
       // For each API, create an API on Tyk
       for (var i = 0; i < data.apis.length; i++) {
 
+        // Skip what's not an API
+        if (data.apis[i].localhost.startsWith('toto-web-')) continue;
+
         // Create the Tyk API
         promises.push(createTykAPI.do(data.apis[i]));
 
