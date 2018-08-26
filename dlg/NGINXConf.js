@@ -1,4 +1,4 @@
-
+var getGithubApis = require('./GetGithubApis');
 var fs = require('fs');
 
 // Create the NGINX conf file
