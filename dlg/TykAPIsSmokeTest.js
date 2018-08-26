@@ -33,7 +33,7 @@ exports.do = function(conf) {
 
       }, () => {
 
-        console.log('Tyk API Gateway : some APIs haven\'t the smoke test...');
+        console.log('Tyk API Gateway : some APIs haven\'t passed the smoke test...');
       });
 
     });
