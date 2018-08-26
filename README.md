@@ -28,8 +28,14 @@ To setup the rest of the Toto environment, just call the toto-enviroment-setup A
 The payload that has to be passed is the following:
 
     {
-      ssl : true/false (to configure SSL)
-      host: the name of the host that will be used for the SSL configuration
+      "env": "dev" or "prod",
+      "ssl" : true/false (to configure SSL)
+      "host": name or IP address of the host,
+      "apiAuth": {
+        "user": username to use for authentication with API,
+        "pwd": password to use for authentication with API
+      },
+     "dataDumpCron": e.g. "0 */3 * * *"
     }
 
 In case of **SSL configuration** you will first need to create the certificates.
