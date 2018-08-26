@@ -11,7 +11,7 @@ exports.do = function(api, conf) {
       url: 'http://gateway:8080/' + api.name + '/',
       method: 'GET',
       headers: {
-        'Authorization': 'Basic ' + new Buffer(conf.apiAuth.user + ':' + conf.apiAuth.pwd).toString('base64'),
+        'Authorization': 'Basic ' + new Buffer(process.env.TOTOAPIUSER + ':' + process.env.TOTOAPIPSWD).toString('base64'),
         'Accept': 'application/json'
       }
     }

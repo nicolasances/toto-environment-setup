@@ -17,7 +17,8 @@ To launch the script:
 
     sh init.sh
 
-The script will ask for the Dockerhub username and password
+The script will ask for the Dockerhub username and password.
+The script will also ask for the user and pswd to protect the APIs.
 
 ## Using the toto-environment-setup microservice
 
@@ -31,11 +32,7 @@ The payload that has to be passed is the following:
       "env": "dev" or "prod",
       "ssl" : true/false (to configure SSL)
       "host": name or IP address of the host,
-      "apiAuth": {
-        "user": username to use for authentication with API,
-        "pwd": password to use for authentication with API
-      },
-     "dataDumpCron": e.g. "0 */3 * * *"
+      "dataDumpCron": e.g. "0 */3 * * *"
     }
 
 In case of **SSL configuration** you will first need to create the certificates.

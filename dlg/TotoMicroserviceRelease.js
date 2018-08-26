@@ -20,8 +20,7 @@ exports.do = function(api, conf) {
         microservice: api.localhost,
         env: conf.env,
         ssl: conf.ssl,
-        host: conf.host,
-        apiAuth: conf.apiAuth
+        host: conf.host
       })
     }
 

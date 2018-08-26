@@ -21,7 +21,6 @@ exports.do = function(conf) {
     if (conf == null) {failure({status: 400, error: 'No configuration provided'}); return;}
     if (conf.env == null) {failure({status: 400, error: 'No "env" field provided in the configuration object. Please provide an env: "prod" or "dev"'}); return;}
     if (conf.host == null) {failure({status: 400, error: 'No \'host\' provided in the body'}); return;}
-    if (conf.apiAuth == null) {failure({status: 400, error: 'No apiAuth data passed. Please provide an apiAuth object {user: <user>, pwd: <pswd>} to be used for API access.'}); return;}
 
     // Prepare the list of promises, since the installation is going to do everything
     // (or most of it) in parallel

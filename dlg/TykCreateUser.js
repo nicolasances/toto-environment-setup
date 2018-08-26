@@ -37,7 +37,7 @@ exports.do = function(conf) {
         "access_rights": accessRights,
         "meta_data": {},
         "basic_auth_data": {
-          "password": conf.apiAuth.pwd
+          "password": process.env.TOTOAPIPSWD
         }
       };
 
@@ -46,7 +46,7 @@ exports.do = function(conf) {
 
       // Create the user on Tyk
       var data = {
-        url : "http://gateway:8080/tyk/keys/" + conf.apiAuth.user,
+        url : "http://gateway:8080/tyk/keys/" + process.env.TOTOAPIUSER,
         method: 'POST',
         headers : {
           'User-Agent' : 'node.js',

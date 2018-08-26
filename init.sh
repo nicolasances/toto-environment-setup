@@ -1,7 +1,9 @@
 
 # Request user dockerhub credentials
 read -p 'Dockerhub User: ' dockerhubUser;
-read  -p 'Dockerhub Pswd: ' -s dockerhubPassword;
+read -p 'Dockerhub Pswd: ' -s dockerhubPassword;
+read -p 'Toto API User: ' totoApiUser;
+read -p 'Toto API Pswd: ' -s totoApiPswd;
 
 # Creating required host folders
 mkdir /mongo-setup;
@@ -29,7 +31,7 @@ mkdir /toto-ci-release;
 git clone https://github.com/nicolasances/toto-ci-release.git /toto-ci-release;
 cd /toto-ci-release;
 docker build -t nicolasances/toto-ci-release .;
-docker run -d --restart always -e DOCKERHUBUSR=$dockerhubUser -e DOCKERHUBPWD=$dockerhubPassword --network totonet -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):/usr/bin/docker --name toto-ci-release nicolasances/toto-ci-release;
+docker run -d --restart always -e TOTOAPIUSER=$totoApiUser -e TOTOAPIPSWD=$totoApiPswd -e DOCKERHUBUSR=$dockerhubUser -e DOCKERHUBPWD=$dockerhubPassword --network totonet -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):/usr/bin/docker --name toto-ci-release nicolasances/toto-ci-release;
 echo 'CI Microservice : toto-ci-release has been built';
 
 # 2. toto-ci-api-list
@@ -41,7 +43,7 @@ docker run -d --restart always --network totonet --name toto-ci-api-list nicolas
 echo 'CI Microservice : toto-ci-api-list has been built';
 
 # Starting this microservice
-docker run -d -p 9999:8080 --network totonet -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):/usr/bin/docker -v /nginx-setup:/nginx-setup --name toto-environment-setup nicolasances/toto-environment-setup:latest;
+docker run -d -p 9999:8080 --network totonet -e TOTOAPIUSER=$totoApiUser -e TOTOAPIPSWD=$totoApiPswd -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):/usr/bin/docker -v /nginx-setup:/nginx-setup --name toto-environment-setup nicolasances/toto-environment-setup:latest;
 
 # Now you can call http://<host>:9999/setup
 echo 'You can now start the setup by POST http://<host>:9999/setup !';
