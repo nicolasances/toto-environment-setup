@@ -17,10 +17,7 @@ exports.do = function(api, conf) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        microservice: api.localhost,
-        env: conf.env,
-        ssl: conf.ssl,
-        host: conf.host
+        microservice: api.localhost
       })
     }
 

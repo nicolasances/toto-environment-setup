@@ -19,6 +19,7 @@ To launch the script:
 
 The script will ask for the Dockerhub username and password.
 The script will also ask for the user and pswd to protect the APIs.
+The script will also ask for the server host and environment (dev or prod).
 
 ## Using the toto-environment-setup microservice
 
@@ -29,8 +30,6 @@ To setup the rest of the Toto environment, just call the toto-enviroment-setup A
 The payload that has to be passed is the following:
 
     {
-      "env": "dev" or "prod",
-      "ssl" : true/false (to configure SSL)
       "host": name or IP address of the host,
       "dataDumpCron": e.g. "0 */3 * * *"
     }

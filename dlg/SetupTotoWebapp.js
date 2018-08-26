@@ -8,9 +8,6 @@ exports.do = function(conf) {
 
     // Create the data to pass to the Toto CI Release MS
     var body = {
-      env: conf.env,
-      ssl: conf.ssl,
-      host: conf.host,
       microservice: 'toto'
     };
 

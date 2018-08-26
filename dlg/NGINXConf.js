@@ -27,7 +27,7 @@ exports.do = function(conf) {
       data += '\t server { \r\n';
 
       // Create the SSL stuff
-      if (conf.ssl) {
+      if (process.env.SERVERSSL == 'true') {
         data += '\t\t listen 443 ssl; \r\n';
         data += '\t\t server_name ' + conf.host + '; \r\n';
         data += '\t\t ssl_certificate /certificates/fullchain1.pem; \r\n';
