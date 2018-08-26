@@ -34,7 +34,7 @@ exports.do = function(conf) {
     promises.push(setupKafka.do());
 
     // 4. Setup Toto Microservices
-    promises.push(setupMicroservices.do());
+    promises.push(setupMicroservices.do(conf));
 
     // Wait for promises to complete and ...
     Promise.all(promises).then(function() {

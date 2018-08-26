@@ -3,7 +3,7 @@ var http = require('request');
 /**
  * This function will build the provided microservice and deploy it on the Docker Engine
  */
-exports.do = function(api) {
+exports.do = function(api, conf) {
 
   return new Promise(function(success, failure) {
 
