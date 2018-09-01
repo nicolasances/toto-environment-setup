@@ -28,6 +28,9 @@ exports.do = function(conf) {
 
       // Create the SSL stuff
       if (process.env.SERVERSSL == 'true') {
+
+        console.log("NGINX : Configuration with SSL enabled");
+
         data += '\t\t listen 443 ssl; \r\n';
         data += '\t\t server_name ' + conf.host + '; \r\n';
         data += '\t\t ssl_certificate /certificates/fullchain1.pem; \r\n';
