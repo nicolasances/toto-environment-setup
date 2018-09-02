@@ -47,11 +47,11 @@ exports.do = function(conf) {
       // 7. Restore Mongo data
       promises.push(restoreMongo.do());
 
-      // 8. Set the dump schedule for Mongo
-      promises.push(scheduleMongoDump.do(conf));
-
       // Wait for everything to finish and you're done!!
       Promise.all(promises).then(function() {
+
+        // 8. Set the dump schedule for Mongo
+        promises.push(scheduleMongoDump.do(conf));
 
         // 9. Setup NGINX
         setupNGINX.do(conf).then(() => {
