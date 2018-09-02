@@ -51,7 +51,7 @@ exports.do = function(conf) {
       Promise.all(promises).then(function() {
 
         // 8. Set the dump schedule for Mongo
-        promises.push(scheduleMongoDump.do(conf));
+        scheduleMongoDump.do(conf);
 
         // 9. Setup NGINX
         setupNGINX.do(conf).then(() => {
