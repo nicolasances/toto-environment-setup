@@ -9,7 +9,7 @@ exports.do = function(conf) {
 
     // Define volumes for certificates
     var certificateVolume = '';
-    if (process.env.SERVERSSL == 'true') certificateVolume = '-v /etc/letsencrypt/archive/' + conf.host + ':/certificates';
+    if (process.env.SERVERSSL == 'true') certificateVolume = '-v /etc/letsencrypt/archive/' + process.env.SERVERHOST + ':/certificates';
 
     console.log('NGINX : Starting NGINX...');
 
