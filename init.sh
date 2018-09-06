@@ -11,6 +11,8 @@ sudo yum remove docker \
                   docker-engine \
                   docker-ce;
 
+rm -rf /var/lib/docker;
+
 # Request user dockerhub credentials
 echo 'Dockerhub configuration'
 read -p 'Dockerhub User: ' dockerhubUser;
