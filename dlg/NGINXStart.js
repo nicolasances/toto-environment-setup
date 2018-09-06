@@ -16,6 +16,8 @@ exports.do = function(conf) {
     // Start NGINX
     var startCmd = 'docker run -d ' + port + ' ' + certificateVolume + ' --network totonet --restart always --name toto-nginx toto-nginx'
 
+    console.log('NGINX : Command: ' + startCmd);
+
     exec(startCmd, function(err, stdout, stderr) {
 
       if (err) {
