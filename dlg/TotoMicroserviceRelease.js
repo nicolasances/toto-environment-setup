@@ -41,7 +41,7 @@ exports.do = function(api, conf) {
         // Retrieve the status
         http(r, (err, resp, body) => {
 
-          ok(JSON.parse(body));
+          if (body != null) ok(JSON.parse(body));
 
         });
       });
