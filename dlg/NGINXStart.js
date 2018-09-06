@@ -5,7 +5,7 @@ exports.do = function(conf) {
   return new Promise(function(success, failure) {
 
     // Define PORT number
-    var port = conf.ssl ? '-p 443:443' : '-p 80:80';
+    var port = process.env.SERVERSSL ? '-p 443:443' : '-p 80:80';
 
     // Define volumes for certificates
     var certificateVolume = '';
