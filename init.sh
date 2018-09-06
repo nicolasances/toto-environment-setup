@@ -45,6 +45,14 @@ systemctl start docker;
 # Create the network for Toto
 docker network create totonet;
 
+# login
+docker login -u $dockerhubUser -p $dockerhubPassword
+
+# Building toto-environment-setup
+git pull;
+docker build -t nicolasances/toto-environment-setup .;
+docker push nicolasances/toto-environment-setup;
+
 # Building CI microservices
 # 1. toto-ci-release
 mkdir /toto-ci-release;
