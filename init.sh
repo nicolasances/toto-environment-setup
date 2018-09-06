@@ -1,3 +1,15 @@
+# Uninstall previous versions
+sudo yum remove docker \
+                  docker-client \
+                  docker-client-latest \
+                  docker-common \
+                  docker-latest \
+                  docker-latest-logrotate \
+                  docker-logrotate \
+                  docker-selinux \
+                  docker-engine-selinux \
+                  docker-engine \
+                  docker-ce;
 
 # Request user dockerhub credentials
 echo 'Dockerhub configuration'
@@ -14,10 +26,10 @@ read -p 'Host (only ip or dns name, no http:// and no port): ' serverHost;
 read -p 'SSL? (true or false): ' serverSSL;
 
 # Creating required host folders
-mkdir /mongo-setup;
-mkdir /mongo-data;
-mkdir /nginx-setup;
-mkdir /tyk;
+mkdir /mongo-setup || true;
+mkdir /mongo-data || true;
+mkdir /nginx-setup || true;
+mkdir /tyk || true;
 
 cp tyk.conf /tyk;
 
