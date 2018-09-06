@@ -32,7 +32,7 @@ exports.do = function(conf) {
         console.log("NGINX : Configuration with SSL enabled");
 
         data += '\t\t listen 443 ssl; \r\n';
-        data += '\t\t server_name ' + conf.host + '; \r\n';
+        data += '\t\t server_name ' + process.env.SERVERHOST + '; \r\n';
         data += '\t\t ssl_certificate /certificates/fullchain1.pem; \r\n';
         data += '\t\t ssl_certificate_key /certificates/privkey1.pem; \r\n';
       }
