@@ -26,10 +26,15 @@ read -p 'Host (only ip or dns name, no http:// and no port): ' serverHost;
 read -p 'SSL? (true or false): ' serverSSL;
 
 # Creating required host folders
-mkdir /mongo-setup || true;
-mkdir /mongo-data || true;
-mkdir /nginx-setup || true;
-mkdir /tyk || true;
+rm -rf /mongo-setup;
+rm -rf /mongo-data;
+rm -rf /nginx-setup;
+rm -rf /tyk;
+
+mkdir /mongo-setup;
+mkdir /mongo-data;
+mkdir /nginx-setup;
+mkdir /tyk;
 
 cp tyk.conf /tyk;
 
@@ -55,6 +60,7 @@ docker push nicolasances/toto-environment-setup;
 
 # Building CI microservices
 # 1. toto-ci-release
+rm -rf /toto-ci-release;
 mkdir /toto-ci-release;
 git clone https://github.com/nicolasances/toto-ci-release.git /toto-ci-release;
 cd /toto-ci-release;
@@ -63,6 +69,7 @@ docker run -d --restart always -e SERVERSSL=$serverSSL -e SERVERENV=$serverEnv -
 echo 'CI Microservice : toto-ci-release has been built';
 
 # 2. toto-ci-api-list
+rm -rf /toto-ci-api-list;
 mkdir /toto-ci-api-list;
 git clone https://github.com/nicolasances/toto-ci-api-list.git /toto-ci-api-list;
 cd /toto-ci-api-list;
