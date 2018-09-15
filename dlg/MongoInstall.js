@@ -15,7 +15,7 @@ exports.do = function() {
     command += 'docker rm mongo || true; ';
 
     // Run mongo
-    command += 'docker run -d -v /mongo-setup:/mongo-setup -v /mongo-data:/mongo-data --network totonet --restart always --name mongo mongo';
+    command += 'docker run -d -v /mongo-setup:/mongo-setup -v /mongo-data:/mongo-data --network totonet --restart always --name mongo mongo:3.4';
 
     // Execute mongo
     exec(command, function(err, stdout, stderr) {
