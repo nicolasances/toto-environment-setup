@@ -2,7 +2,7 @@ var getGithubApis = require('./GetGithubApis');
 var fs = require('fs');
 
 // Create the NGINX conf file
-// To configure SSL the following parameters need to be passed:
+// To configure SSL the following parameters need to be passed: --- NO: they're taken from ENV variables
 //  * conf.ssl (true)
 //  * conf.host (host name)
 exports.do = function(conf) {

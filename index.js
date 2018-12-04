@@ -3,6 +3,7 @@ var Promise = require('promise');
 var bodyParser = require("body-parser");
 
 var postSetup = require('./dlg/PostSetup');
+var postNginxRebuild = require('./dlg/PostNginxRebuild');
 
 var apiName = 'environment-setup';
 
@@ -23,15 +24,28 @@ app.use(express.static('/app'));
 app.get('/', function(req, res) {res.send({api: apiName, status: 'running'});});
 
 /**
- * Receives a notification that a build on dockerhub has been performed.
+ * Start the environment setup
  */
 app.post('/setup', function(req, res) {
+
   postSetup.do(req.body).then(function(result) {
     res.status(200).send(result);
   }, function(error) {
     res.status(error.status).send(error);
   });
 });
+
+/**
+ * Regenerates NGINX
+ */
+app.post('/nginx/builds', (req, res) => {
+
+  postNginxRebuild.do().then((result) => {
+    res.status(200).send(result);
+  }, (err) => {
+    res.status(err.status).send(err);
+  })
+})
 
 app.listen(8080, function() {
   console.log('Toto Environment Setup Microservice up and running');

@@ -3,6 +3,7 @@ var createDockerfile = require('./NGINXDockerfile');
 var stopNGINX = require('./NGINXStop');
 var buildNGINX = require('./NGINXBuild');
 var startNGINX = require('./NGINXStart');
+var cleanNGINX = require('./NGINXClean');
 var exec = require('child_process').exec;
 
 // Set up NGINX
@@ -12,26 +13,31 @@ exports.do = function(conf) {
 
   return new Promise(function(success, failure) {
 
-    console.log("NGINX : Starting setup...");
+    console.log("NGINX : Setting up...");
 
-    // Create the NGINX configuration file
-    createConfFile.do(conf).then(function() {
+    // Clean environment
+    cleanNGINX.do().then(() => {
 
-      // Create the Dockerfile
-      createDockerfile.do(conf).then(function() {
+      // Create the NGINX configuration file
+      createConfFile.do(conf).then(function() {
 
-        // Stop NGINX if any
-        stopNGINX.do(conf).then(function() {
+        // Create the Dockerfile
+        createDockerfile.do(conf).then(function() {
 
-          // Build docker image
-          buildNGINX.do(conf).then(function() {
+          // Stop NGINX if any
+          stopNGINX.do(conf).then(function() {
 
-            // Start NGINX
-            startNGINX.do(conf).then(function() {
+            // Build docker image
+            buildNGINX.do(conf).then(function() {
 
-              console.log("NGINX : setup complete!");
+              // Start NGINX
+              startNGINX.do(conf).then(function() {
 
-              success();
+                console.log("NGINX : setup complete!");
+
+                success();
+
+              });
 
             });
 
