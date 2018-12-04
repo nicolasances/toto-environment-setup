@@ -4,6 +4,7 @@ var bodyParser = require("body-parser");
 
 var postSetup = require('./dlg/PostSetup');
 var postNginxRebuild = require('./dlg/PostNginxRebuild');
+var postAPIGatewayBuild = require('./dlg/PostAPIGatewayBuild');
 
 var apiName = 'environment-setup';
 
@@ -45,7 +46,19 @@ app.post('/nginx/builds', (req, res) => {
   }, (err) => {
     res.status(err.status).send(err);
   })
-})
+});
+
+/**
+ * Regenerates the API Gateway
+ */
+app.post('/gateway/builds', (req, res) => {
+
+  postAPIGatewayBuild.do().then((result) => {
+    res.status(200).send(result);
+  }, (err) => {
+    res.status(err.status).send(err);
+  })
+});
 
 app.listen(8080, function() {
   console.log('Toto Environment Setup Microservice up and running');
