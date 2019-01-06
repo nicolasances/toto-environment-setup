@@ -67,7 +67,7 @@ mkdir /toto-ci-release;
 git clone https://github.com/nicolasances/toto-ci-release.git /toto-ci-release;
 cd /toto-ci-release;
 docker build -t nicolasances/toto-ci-release .;
-docker run -d --restart always -e SERVERSSL=$serverSSL -e SERVERENV=$serverEnv -e SERVERHOST=$serverHost -e TOTOAPIUSER=$totoApiUser -e TOTOAPIPSWD=$totoApiPswd -e DOCKERHUBUSR=$dockerhubUser -e DOCKERHUBPWD=$dockerhubPassword --network totonet -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):/usr/bin/docker --name toto-ci-release nicolasances/toto-ci-release;
+docker run -d --restart always -e SERVERSSL=$serverSSL -e SERVERENV=$serverEnv -e SERVERHOST=$serverHost -e TOTOAPIUSER=$totoApiUser -e TOTOAPIPSWD=$totoApiPswd -e DOCKERHUBUSR=$dockerhubUser -e DOCKERHUBPWD=$dockerhubPassword --network totonet -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):/usr/bin/docker -v /nginx-setup:/nginx-setup --name toto-ci-release nicolasances/toto-ci-release;
 echo 'CI Microservice : toto-ci-release has been built';
 
 # 2. toto-ci-api-list
