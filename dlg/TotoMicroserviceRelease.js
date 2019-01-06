@@ -17,7 +17,8 @@ exports.do = function(api, conf) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        microservice: api.localhost
+        microservice: api.localhost,
+        skipNGINXreconfig: true
       })
     }
 
