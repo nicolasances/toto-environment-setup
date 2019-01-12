@@ -15,17 +15,27 @@ rm -rf /var/lib/docker;
 
 # Request user dockerhub credentials
 echo 'Dockerhub configuration'
+echo
 read -p 'Dockerhub User: ' dockerhubUser;
 read -p 'Dockerhub Pswd: ' -s dockerhubPassword;
+echo
 
 echo 'Toto API security configuration'
+echo
 read -p 'Toto API User: ' totoApiUser;
 read -p 'Toto API Pswd: ' -s totoApiPswd;
 
 echo 'Server info'
+echo
 read -p 'Environment (dev or prod): ' serverEnv;
 read -p 'Host (only ip or dns name, no http:// and no port): ' serverHost;
 read -p 'SSL? (true or false): ' serverSSL;
+echo
+
+# Install Certificates
+sudo git clone https://github.com/letsencrypt/letsencrypt /opt/letsencrypt;
+
+sudo -H /opt/letsencrypt/letsencrypt-auto certonly --standalone -d $serverHost
 
 # Creating required host folders
 rm -rf /mongo-setup;
