@@ -15,7 +15,7 @@ exports.do = function(conf) {
       var accessRights = new Object();
 
       // We're going to allow the API definition
-      accessRights.1 = {
+      accessRights['1'] = {
         "api_id": "1",
         "api_name": "Tyk Test API",
         "versions": ["Default"]
