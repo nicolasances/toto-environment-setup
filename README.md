@@ -31,8 +31,7 @@ To setup the rest of the Toto environment, just call the toto-enviroment-setup A
 The payload that has to be passed is the following:
 
     {
-      "host": name or IP address of the host,
-      "dataDumpCron": e.g. "0 */3 * * *"
+      "dataDumpCron": "0 */3 * * *"
     }
 
 The certificates will have been **generated through Let's Encrypt** and stored at `/etc/letsencrypt/archive/<host name>/`.
