@@ -41,7 +41,7 @@ app.post('/setup', function(req, res) {
 // Retrieve the Tyk user key so that permissions can be added
 app.get('/key', function(req, res) {
 
-  getTykUserKey.do().then((key) => {res.status(200).send(key)}, () => {res.status(500).send()});
+  getTykUserKey.do().then((key) => {res.status(200).send(key)}, () => {res.status(500).send({})});
 
 });
 
