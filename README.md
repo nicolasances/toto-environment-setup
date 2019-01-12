@@ -6,6 +6,7 @@ This service helps setting up a Toto Environment (dev, test, prod, ...).
 
 Once you have a VM **with CentOS**, the first step is to launch the `init.sh` script.
 This script will:
+ * Install the letsencrypt certificates
  * Create the necessary folders on the VM
  * Install Docker CE
  * Enable and start the Docker service
@@ -34,5 +35,4 @@ The payload that has to be passed is the following:
       "dataDumpCron": e.g. "0 */3 * * *"
     }
 
-In case of **SSL configuration** you will first need to create the certificates.
-The certificates will have to be **generated through Let's Encrypt** and stored at `/etc/letsencrypt/archive/<host name>/`.
+The certificates will have been **generated through Let's Encrypt** and stored at `/etc/letsencrypt/archive/<host name>/`.
