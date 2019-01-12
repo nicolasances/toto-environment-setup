@@ -14,13 +14,11 @@ exports.do = function(conf) {
       // Create the access_rights object
       var accessRights = new Object();
 
-      // For each API, get the tyk id
-      for (var i = 0; i < data.apis.length; i++) {
-        accessRights[data.apis[i].localhost] = {
-          api_id : data.apis[i].localhost,
-          api_name : data.apis[i].name,
-          versions : ["Default"]
-        };
+      // We're going to allow the API definition
+      accessRights.1 = {
+        "api_id": "1",
+        "api_name": "Tyk Test API",
+        "versions": ["Default"]
       }
 
       // Now create the whole "create user" object
