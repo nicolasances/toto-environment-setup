@@ -47,7 +47,7 @@ var releaseNextAPI = function(apis, conf) {
     releaseMs.do(apis.pop(), conf).then(() = {
 
       // Release next api
-      releaseNextAPI(apis, conf).then(success;
+      releaseNextAPI(apis, conf).then(success);
     });
 
   });
