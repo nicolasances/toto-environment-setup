@@ -3,6 +3,8 @@ var createUser = require('./TykCreateUser');
 var exec = require('child_process').exec;
 var http = require('request');
 
+var userKey;
+
 exports.do = function(conf) {
 
   return new Promise(function(success, failure) {
@@ -41,10 +43,13 @@ exports.do = function(conf) {
       setTimeout(() => {
 
         // Create the user
-        createUser.do().then(() => {
+        createUser.do().then((createUserResp) => {
 
-          // REload tyk
+          // Reload tyk
           reloadTyk.do().then(success, failure);
+
+          // Store the received hash
+          userKey = createUserResp.key;
 
         }, failure);
 
@@ -53,4 +58,8 @@ exports.do = function(conf) {
     });
 
   });
+}
+
+exports.getUserKey = function() {
+  return userKey;
 }

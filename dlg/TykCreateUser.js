@@ -62,7 +62,11 @@ exports.do = function(conf) {
 
         console.log("Tyk API Gateway : API user created!");
 
-        success();
+        // Get the created hash of the key for future use
+        let createResponse = JSON.parse(body);
+
+        if (createResponse.key == null) failure({message: 'User could not be created..'});
+        else success({key: createResponse.key})
 
       });
 

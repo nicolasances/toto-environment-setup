@@ -5,6 +5,7 @@ var bodyParser = require("body-parser");
 var postSetup = require('./dlg/PostSetup');
 var postNginxRebuild = require('./dlg/PostNginxRebuild');
 var postAPIGatewayBuild = require('./dlg/PostAPIGatewayBuild');
+var getTykUserKey = require('./dlg/GetTykUserKey');
 
 var apiName = 'environment-setup';
 
@@ -34,30 +35,14 @@ app.post('/setup', function(req, res) {
   }, function(error) {
     res.status(error.status).send(error);
   });
+
 });
 
-/**
- * Regenerates NGINX
- */
-app.post('/nginx/builds', (req, res) => {
+// Retrieve the Tyk user key so that permissions can be added
+app.get('/tykKey', function(req, res) {
 
-  postNginxRebuild.do().then((result) => {
-    res.status(200).send(result);
-  }, (err) => {
-    res.status(err.status).send(err);
-  })
-});
+  getTykUserKey.do().then((key) => {res.status(200).send(key)}, () => {res.status(500).send()});
 
-/**
- * Regenerates the API Gateway
- */
-app.post('/gateway/builds', (req, res) => {
-
-  postAPIGatewayBuild.do().then((result) => {
-    res.status(200).send(result);
-  }, (err) => {
-    res.status(err.status).send(err);
-  })
 });
 
 app.listen(8080, function() {
