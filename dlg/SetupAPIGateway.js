@@ -1,9 +1,7 @@
-var createAPIs = require('./TykCreateAPIs');
 var reloadTyk = require('./TykReload');
 var createUser = require('./TykCreateUser');
 var exec = require('child_process').exec;
 var http = require('request');
-var smokeAPIs = require('./TykAPIsSmokeTest');
 
 exports.do = function(conf) {
 
@@ -42,23 +40,7 @@ exports.do = function(conf) {
       // Creating the APIS on the Gateway
       setTimeout(() => {
 
-        createAPIs.do().then(() => {
-
-          return reloadTyk.do();
-
-        }).then(() => {
-
-          return createUser.do(conf);
-
-        }).then(() => {
-
-          return reloadTyk.do();
-
-        }).then(() => {
-
-          return smokeAPIs.do(conf);
-
-        }).then(success, () => {failure();});
+        createUser.do().then(success, failure);
 
       }, 3000);
 
