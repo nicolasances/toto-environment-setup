@@ -14,13 +14,6 @@ exports.do = function(conf) {
       // Create the access_rights object
       var accessRights = new Object();
 
-      // We're going to allow the API definition
-      accessRights['1'] = {
-        "api_id": "1",
-        "api_name": "Tyk Test API",
-        "versions": ["Default"]
-      }
-
       // Now create the whole "create user" object
       var key = {
         "allowance": 1000,
@@ -32,7 +25,13 @@ exports.do = function(conf) {
         "quota_renews": 1449051461,
         "quota_remaining": -1,
         "quota_renewal_rate": 60,
-        "access_rights": accessRights,
+        "access_rights": {
+          "1": {
+            "api_id": "1",
+            "api_name": "Tyk Test API",
+            "versions": ["Default"]
+          }
+        },
         "meta_data": {},
         "basic_auth_data": {
           "password": process.env.TOTOAPIPSWD
