@@ -37,10 +37,16 @@ exports.do = function(conf) {
 
       console.log("Tyk API Gateway : gateway installation complete!");
 
-      // Creating the APIS on the Gateway
+      // Wait before creating the user
       setTimeout(() => {
 
-        createUser.do().then(success, failure);
+        // Create the user
+        createUser.do().then(() => {
+
+          // REload tyk
+          reloadTyk.do().then(success, failure);
+
+        }, failure);
 
       }, 3000);
 
