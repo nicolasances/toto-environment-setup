@@ -44,7 +44,7 @@ var releaseNextAPI = function(apis, conf) {
     if (apis == null || apis.length == 0) success();
 
     // Release the api
-    releaseMs.do(apis.pop(), conf).then(() = {
+    releaseMs.do(apis.pop(), conf).then(() => {
 
       // Release next api
       releaseNextAPI(apis, conf).then(success);
