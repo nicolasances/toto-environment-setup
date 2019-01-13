@@ -16,8 +16,7 @@ exports.do = function(conf) {
 
       // Remove from the list of apis the ones that are toto-ci-*
       for (var i = 0; i < data.apis.length; i++) {
-        if (data.apis[i].localhost.startsWith('toto-ci-') ||
-            data.apis[i].localhost.startsWith('toto-web-')) data.apis.splice(i, 1);
+        if (data.apis[i].localhost.startsWith('toto-ci-')) data.apis.splice(i, 1);
       }
 
       // 2. Build and deploy each api, ONE AT A TIME
