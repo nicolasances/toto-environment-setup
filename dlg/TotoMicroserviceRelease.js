@@ -69,12 +69,16 @@ exports.do = function(api, conf) {
 
       getStatus(api.localhost).then((result) => {
 
+        // Log the status IF IT HAS CHANGED
         if (currentReleaseStatus != result.status) console.log("Toto Microservices : [" + result.microservice + "] - Status " + result.status);
 
+        // Update the current status
         currentReleaseStatus = result.status;
 
+        // Recusion termination - Terminate the polling if the status has become RELEASED
         if (result.status == 'RELEASED') {success(); return;}
 
+        // Recursively go on with the polling
         setTimeout(poll, 1000);
 
       });
