@@ -7,6 +7,17 @@ exports.do = function(api, conf) {
 
   return new Promise(function(success, failure) {
 
+    // Some checks
+    // A. Check that api <> NULL
+    if (api == null) {
+
+      // Log the error
+      console.log("Toto Microservices - ERROR! Requested released of a microservice, but api == null!! Going on as if nothing happened... :) ");
+
+      // Go on, if the API is null we shouldn't care
+      success(); return;
+    }
+
     var currentReleaseStatus = '';
 
     // Preparing the call
