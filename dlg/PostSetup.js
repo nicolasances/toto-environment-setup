@@ -30,7 +30,7 @@ exports.do = function(conf) {
     // 3. Setup Kafka and Zookeeper
     promises.push(setupKafka.do());
 
-    // 5. Setup API Gateway
+    // 4. Setup API Gateway
     promises.push(setupAPIGateway.do(conf));
 
     // Wait for promises to complete and ...
@@ -38,17 +38,17 @@ exports.do = function(conf) {
 
       promises = [];
 
-      // 4. Setup Toto Microservices
+      // 5. Setup Toto Microservices
       promises.push(setupMicroservices.do(conf));
 
       // 6. Setup Toto Webapp (through CI Microservice, that's why I'm waiting this moment)
       promises.push(setupTotoWebapp.do(conf));
 
-      // 7. Restore Mongo data
-      promises.push(restoreMongo.do());
-
       // Wait for everything to finish and you're done!!
       Promise.all(promises).then(function() {
+
+        // 7. Restore Mongo data
+        promises.push(restoreMongo.do());
 
         // 8. Set the dump schedule for Mongo
         scheduleMongoDump.do(conf);
