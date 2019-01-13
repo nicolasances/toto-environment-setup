@@ -47,13 +47,13 @@ var releaseNextAPI = function(apis, conf) {
   return new Promise(function(success, failure) {
 
     // Terminating condition for the recursive function: no more apis to release
-    if (apis == null || apis.length == 0) success();
+    if (apis == null || apis.length == 0) {success(); return;}
 
     // Next API to release
     let api = apis.pop();
 
-    // Log the API that is about to be released:
-    if (api != null) console.log("Toto Microservices : About to release the following API: " + JSON.stringify(api));
+    // In case there are no more APIs to release but the pop() function keeps getting stuff out, terminate the recursion
+    if (api == null) {success(); return;}
 
     // Release the api
     releaseMs.do(api, conf).then(() => {
