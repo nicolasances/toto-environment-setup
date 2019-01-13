@@ -42,7 +42,21 @@ exports.do = function(api, conf) {
         // Retrieve the status
         http(r, (err, resp, body) => {
 
-          if (body != null) ok(JSON.parse(body));
+          try {
+            // Parse the body of the response, should contain the status
+            let statusResponse = JSON.parse(body);
+
+            // Fullfil the promise
+            ok(statusResponse);
+
+          } catch (e) {
+            // Log the error
+            console.log('[' + microservice + '] - ERROR in retreiving the status from toto-ci-release. Following error received:');
+            console.log(e);
+
+            // Fail the call
+            fail({message: 'Error in release of ' + microservice + '. Error retrieving the status of the release.'});
+          }
 
         });
       });
