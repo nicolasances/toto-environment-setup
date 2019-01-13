@@ -14,9 +14,9 @@ exports.do = function(conf) {
 
       console.log("Toto Microservices : retreived " + data.apis.length + " Toto Microservices from Github.");
 
-      // Remove from the list of apis the ones that are toto-ci-*
+      // If it's a toto-ci-*, add to the gateway, but do not allow RELEASE
       for (var i = 0; i < data.apis.length; i++) {
-        if (data.apis[i].localhost.startsWith('toto-ci-')) data.apis.splice(i, 1);
+        if (data.apis[i].localhost.startsWith('toto-ci-')) data.apis[i].skipDockerRelease = true;
       }
 
       // 2. Build and deploy each api, ONE AT A TIME

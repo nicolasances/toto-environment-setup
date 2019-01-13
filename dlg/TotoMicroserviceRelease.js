@@ -29,7 +29,7 @@ exports.do = function(api, conf) {
       },
       body: JSON.stringify({
         microservice: api.localhost,
-        skipNGINXreconfig: true
+        skipDockerRelease: api.skipDockerRelease
       })
     }
 
