@@ -52,6 +52,7 @@ exports.do = function(api, conf) {
           } catch (e) {
             // Log the error
             console.log('Toto Microservices : [' + microservice + '] - ERROR in retreiving the status from toto-ci-release. Following error received:');
+            console.log('Toto Microservices : [' + microservice + '] - JSON body received: ' + body);
             console.log(e);
 
             // Fail the call
