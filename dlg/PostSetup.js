@@ -7,6 +7,7 @@ var setupTotoWebapp = require('./SetupTotoWebapp');
 var setupNGINX = require('./SetupNGINX');
 var restoreMongo = require('./MongoRestore');
 var scheduleMongoDump = require('./MongoScheduleDump');
+var setupFilebeat = require('./SetupFilebeat');
 
 /**
  * This Microservice just sets up the whole Toto Environment
@@ -47,18 +48,27 @@ exports.do = function(conf) {
       // Wait for everything to finish and you're done!!
       Promise.all(promises).then(function() {
 
+        promises = [];
+
         // 7. Restore Mongo data
         promises.push(restoreMongo.do());
 
         // 8. Set the dump schedule for Mongo
-        scheduleMongoDump.do(conf);
+        promises.push(scheduleMongoDump.do(conf));
 
-        // 9. Setup NGINX
-        setupNGINX.do(conf).then(() => {
+        // 9. Start Filebeat
+        promises.push(setupFilebeat.do(conf));
 
-          console.log("Toto Environment setup complete!");
+        Promise.all(promises).then(() => {
 
-          success({status: 200, completed: true, message: 'Toto Environment setup complete!'});
+          // 10. Setup NGINX
+          setupNGINX.do(conf).then(() => {
+
+            console.log("Toto Environment setup complete!");
+
+            success({status: 200, completed: true, message: 'Toto Environment setup complete!'});
+
+          }, () => {failure({status: 500, completed: false, message: 'Toto Environment setup failed...'})});
 
         }, () => {failure({status: 500, completed: false, message: 'Toto Environment setup failed...'})});
 
