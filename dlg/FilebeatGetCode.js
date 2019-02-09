@@ -10,7 +10,7 @@ exports.do = function(conf) {
     var command = ''
 
     // Remove the folder if any
-    command += 'rm -r /filebeat ';
+    command += 'rm -r /filebeat || true; ';
 
     // Clone the git repository
     command += 'git clone https://github.com/nicolasances/toto-filebeat.git /filebeat; ';
