@@ -13,7 +13,7 @@ exports.do = function(data) {
     command += 'docker rm filebeat || true; ';
 
     // Run the microservice
-    command += 'docker run -d --name filebeat --network totonet -u root -v /var/lib/docker/containers:/var/lib/docker/containers -v /var/run/docker.sock:/var/run/docker.sock  nicolasances/filebeat';
+    command += 'docker run -d --name filebeat --network totonet --restart always -u root -v /var/lib/docker/containers:/var/lib/docker/containers -v /var/run/docker.sock:/var/run/docker.sock  nicolasances/filebeat';
 
     exec(command, function(err) {
 

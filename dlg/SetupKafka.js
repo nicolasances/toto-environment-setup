@@ -34,9 +34,13 @@ exports.do = function() {
 
       // Stop Kafka if running
       kafkaCmd += 'docker stop kafka || true; ';
-
-      // Remove Kafka if any
       kafkaCmd += 'docker rm kafka || true; ';
+      kafkaCmd += 'docker rmi nicolasances/kafka || true; ';
+
+      // Download and build Kafka
+      kafkaCmd += 'rm -r /kafka || true; ';
+      kafkaCmd += 'git clone https://github.com/nicolasances/toto-kafka.git /kafka; ';
+      kafkaCmd += 'docker build -t nicolasances/kafka /kafka; ';
 
       // Start Kafka
       kafkaCmd += 'docker run -d -p 9092:9092 --network totonet --restart always --name kafka nicolasances/kafka; ';
