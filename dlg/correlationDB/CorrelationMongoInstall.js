@@ -9,10 +9,10 @@ exports.do = function() {
     var command = '';
 
     // Stop Mongo if it already exists
-    command += 'docker stop mongo || true; ';
+    command += 'docker stop toto-db-correlation || true; ';
 
     // Remove Mongo if any
-    command += 'docker rm mongo || true; ';
+    command += 'docker rm toto-db-correlation || true; ';
 
     // Run mongo
     // No need to mount volumes: I don't care about losing the data
