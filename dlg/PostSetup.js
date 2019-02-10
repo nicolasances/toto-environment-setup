@@ -1,5 +1,6 @@
 
 var setupMongo = require('./SetupMongo');
+var setupCorrelationDB = require('./correlationDB/SetupCorrelationDB');
 var setupKafka = require('./SetupKafka');
 var setupMicroservices = require('./SetupMicroservices');
 var setupAPIGateway = require('./SetupAPIGateway');
@@ -25,8 +26,11 @@ exports.do = function(conf) {
     // (or most of it) in parallel
     var promises = [];
 
-    // 2. Setup Mongo DB
+    // 2. Setup Databases
+    // Main Mongo DB
     promises.push(setupMongo.do());
+    // Correlation database
+    promises.push(setupCorrelationDB.do());
 
     // 3. Setup Kafka and Zookeeper
     promises.push(setupKafka.do());
