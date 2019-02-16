@@ -51,6 +51,7 @@ exports.do = function(conf) {
       for (var i = 0; i < webapps.length; i++) {
         data += '\t\t location /' + webapps[i].name + '/ { \r\n';
         data += '\t\t\t proxy_pass http://' + webapps[i].localhost + '/; \r\n';
+        data += '\t\t\t autoindex on; \r\n';
         data += '\t\t } \r\n';
       }
 
