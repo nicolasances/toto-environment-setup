@@ -48,7 +48,8 @@ exports.do = function(conf) {
         headers : {
           'User-Agent' : 'node.js',
           'x-tyk-authorization': 'totocazzo',
-          'Content-Type' : 'application/json'
+          'Content-Type' : 'application/json',
+          'x-correlation-id': 'setup'
         },
         body: JSON.stringify(key)
       };

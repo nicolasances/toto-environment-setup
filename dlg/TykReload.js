@@ -12,13 +12,14 @@ exports.do = function() {
       method: 'GET',
       headers : {
         'User-Agent' : 'node.js',
-        'x-tyk-authorization': 'totocazzo'
+        'x-tyk-authorization': 'totocazzo',
+        'x-correlation-id': 'setup'
       }
     };
 
     // Reload the gateway
     setTimeout(function() {
-      
+
       http(data, function(err, resp, body) {
 
         if (err) {

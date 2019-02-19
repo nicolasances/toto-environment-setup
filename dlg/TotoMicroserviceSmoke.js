@@ -10,7 +10,8 @@ exports.do = function(api) {
       url: 'http://' + api.localhost + ':8080/',
       method: 'GET',
       headers: {
-        'Accept': 'application/json'
+        'Accept': 'application/json',
+        'x-correlation-id': 'setup'
       }
     }
 

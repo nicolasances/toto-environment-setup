@@ -9,7 +9,8 @@ exports.getApis = function() {
       url : "http://toto-ci-api-list:8080/apis",
       method: 'GET',
       headers : {
-        'Accept' : 'application/json'
+        'Accept' : 'application/json',
+        'x-correlation-id': 'setup'
       }
     };
 

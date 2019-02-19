@@ -25,7 +25,8 @@ exports.do = function(api, conf) {
       url : 'http://toto-ci-release:8080/releases',
       method : 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'x-correlation-id': 'setup'
       },
       body: JSON.stringify({
         microservice: api.localhost,
