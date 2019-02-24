@@ -94,3 +94,4 @@ docker run -d -p 9999:8080 --network totonet -e SERVERSSL=$serverSSL -e SERVEREN
 
 # Now you can call http://<host>:9999/setup
 echo 'You can now start the setup by POST http://<host>:9999/setup !';
+echo 'curl -X POST  http://<host>:9999/setup -H \'Content-Type: application/json\' -d \'{"dataDumpCron": "0 */3 * * *"}\''
