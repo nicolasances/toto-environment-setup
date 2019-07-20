@@ -20,13 +20,6 @@ read -p 'Dockerhub User: ' dockerhubUser;
 read -p 'Dockerhub Pswd: ' -s dockerhubPassword;
 echo
 
-echo 'Bitbucket ...'
-echo
-read -p 'User: ' bitbucketUser;
-echo
-read -p 'Pswd: ' -s bitbucketPswd;
-echo
-
 echo 'Toto API security configuration'
 echo
 read -p 'Toto API User: ' totoApiUser;
