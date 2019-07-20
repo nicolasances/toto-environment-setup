@@ -35,8 +35,7 @@ echo
 # Install PubSub
 rm -rf /keys;
 mkdir /keys;
-sudo git clone https://totoances@bitbucket.org/totoances/toto-events-dev.git /keys;
-
+sudo git clone https://totoances@bitbucket.org/totoances/toto-events-$serverEnv.git /keys;
 
 # Install Certificates
 sudo git clone https://github.com/letsencrypt/letsencrypt /opt/letsencrypt;
