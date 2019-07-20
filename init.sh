@@ -20,6 +20,13 @@ read -p 'Dockerhub User: ' dockerhubUser;
 read -p 'Dockerhub Pswd: ' -s dockerhubPassword;
 echo
 
+echo 'Bitbucket ...'
+echo
+read -p 'User: ' bitbucketUser;
+echo
+read -p 'Pswd: ' -s bitbucketPswd;
+echo
+
 echo 'Toto API security configuration'
 echo
 read -p 'Toto API User: ' totoApiUser;
@@ -31,6 +38,12 @@ read -p 'Environment (dev or prod): ' serverEnv;
 read -p 'Host (only ip or dns name, no http:// and no port): ' serverHost;
 read -p 'SSL? (true or false): ' serverSSL;
 echo
+
+# Install PubSub
+rm -rf /keys;
+mkdir /keys;
+sudo git clone https://totoances@bitbucket.org/totoances/toto-events-dev.git /keys;
+
 
 # Install Certificates
 sudo git clone https://github.com/letsencrypt/letsencrypt /opt/letsencrypt;
