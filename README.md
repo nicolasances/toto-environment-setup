@@ -2,7 +2,17 @@
 
 This service helps setting up a Toto Environment (dev, test, prod, ...).
 
+The new version **includes Google PubSub**!!! <br/>
+Check later instructions to setup PubSub..
+
 ## Setting up a Toto environment
+
+First thing ... **Set up PubSub!!** <br/>
+You do that by doing the following: 
+ * Create a ***Service Account*** and get the `json` file
+ * Rename the file in `pubsub.json` and source version it on the private repo
+ * The script will take care of the rest
+The important thing is **the name pubsub.json**!!!
 
 Once you have a VM **with CentOS**, the first step is to launch the `init.sh` script.
 This script will:
