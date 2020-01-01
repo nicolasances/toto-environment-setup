@@ -1,3 +1,6 @@
+# New on Centos8 
+dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo;
+
 # Uninstall previous versions
 sudo yum remove docker \
                   docker-client \
@@ -58,7 +61,8 @@ cp tyk.conf /tyk;
 # Installing docker
 sudo yum install -y yum-utils device-mapper-persistent-data lvm2;
 sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo;
-sudo yum install -y docker-ce;
+# sudo yum install -y docker-ce;
+dnf install docker-ce --nobest -y;
 
 # Enable and start docker
 systemctl enable docker;
