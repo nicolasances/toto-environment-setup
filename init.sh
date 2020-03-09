@@ -17,11 +17,11 @@ sudo yum remove docker \
 rm -rf /var/lib/docker;
 
 # Request user dockerhub credentials
-echo 'Dockerhub configuration'
-echo
-read -p 'Dockerhub User: ' dockerhubUser;
-read -p 'Dockerhub Pswd: ' -s dockerhubPassword;
-echo
+# echo 'Dockerhub configuration'
+# echo
+# read -p 'Dockerhub User: ' dockerhubUser;
+# read -p 'Dockerhub Pswd: ' -s dockerhubPassword;
+# echo
 
 echo 'Toto API security configuration'
 echo
@@ -35,10 +35,17 @@ read -p 'Host (only ip or dns name, no http:// and no port): ' serverHost;
 read -p 'SSL? (true or false): ' serverSSL;
 echo
 
+echo 'Repository for Service Accounts\n'
+echo 'Please insert the URL of the repo where Service Accounts can be found\n'
+echo 'Example: https://<user>@bitbucket.org/<project>/toto-service-account-dev.git'
+echo
+read -p 'URL: ' serviceAccountRepo;
+echo
+
 # Install PubSub
 rm -rf /keys;
 mkdir /keys;
-sudo git clone https://totoances@bitbucket.org/totoances/toto-events-$serverEnv.git /keys;
+sudo git clone $serviceAccountRepo /keys;
 
 # Install Certificates
 sudo git clone https://github.com/letsencrypt/letsencrypt /opt/letsencrypt;
@@ -72,12 +79,12 @@ systemctl start docker;
 docker network create totonet;
 
 # login
-docker login -u $dockerhubUser -p $dockerhubPassword
+# docker login -u $dockerhubUser -p $dockerhubPassword
 
 # Building toto-environment-setup
 git pull;
 docker build -t nicolasances/toto-environment-setup .;
-docker push nicolasances/toto-environment-setup;
+# docker push nicolasances/toto-environment-setup;
 
 # Building CI microservices
 # 1. toto-ci-release
