@@ -33,7 +33,7 @@ exports.do = function(conf) {
     promises.push(setupCorrelationDB.do());
 
     // 3. Setup Kafka and Zookeeper
-    promises.push(setupKafka.do());
+    // promises.push(setupKafka.do());
 
     // 4. Setup API Gateway
     promises.push(setupAPIGateway.do(conf));
@@ -61,7 +61,7 @@ exports.do = function(conf) {
         promises.push(scheduleMongoDump.do(conf));
 
         // 9. Start Filebeat
-        promises.push(setupFilebeat.do(conf));
+        // promises.push(setupFilebeat.do(conf));
 
         Promise.all(promises).then(() => {
 
